@@ -301,6 +301,42 @@ footer{
 }
 
 
+.header-row{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:flex-start;
+  gap:28px;
+}
+
+.cost-badge{
+  margin-top:4px; /* optical alignment with Playfair cap height */
+  padding:10px 14px;
+  border:1px solid var(--frame);
+  border-radius:12px;
+  background:var(--paper);
+  box-shadow:var(--shadow);
+  min-width:220px;
+}
+
+.cost-primary{
+  font-weight:600;
+  font-size:1.05rem; /* slightly larger than body, smaller than h1 */
+  letter-spacing:.01em;
+  color:var(--ink);
+}
+
+.cost-sub{
+  margin-top:2px;
+  font-size:.8rem;
+  color:var(--muted);
+  line-height:1.25;
+}
+
+.cost-primary.alt-serif{
+  font-family:'Playfair Display',serif;
+}
+
+
   </style>
 </head>
 <body>
@@ -319,10 +355,19 @@ footer{
     </div>
   </nav>
 
-  <header>
+<header>
+
+  <div class="header-row">
     <h1>Maquette For The End Of Time</h1>
-    <p class="lead">An audiovisual work presented with documentation suitable for acquisition. Replace placeholders below with media stills and an embedded preview when available.</p>
-  </header>
+
+    <div class="cost-badge">
+      <div class="cost-primary">$18,000</div>
+      <div class="cost-sub">Appraised by Cranbrook Art School (2024) at $60,000</div>
+    </div>
+  </div>
+
+</header>
+
 
   <main class="layout">
  <div class="media-stack">
