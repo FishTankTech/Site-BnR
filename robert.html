@@ -1,142 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ===============================
-       1. META & TITLE
-       =============================== -->
-  <meta charset="utf-8">
-  <title>Robert de Laverne | Bob & Robert</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="All about Robert de Laverne, chronicler and documentarian of Bob Cremean’s life and work." />
 
-  <!-- ===============================
-       2. FONTS
-       =============================== -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<title>Robert de Laverne | Bob & Robert</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Robert de Laverne, chronicler and documentarian of Bob Cremean’s life and work." />
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 
   <!-- ===============================
        3. EXTERNAL CSS
        =============================== -->
   <link rel="stylesheet" href="style.css">
-<style>
-/* MAIN CONTENT: add spacing from page edges */
-main {
-  max-width: var(--max);
-  margin: 64px auto 100px;  /* centers content */
-  padding: 0 32px;          /* spacing from page sides */
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-
-/* HERO SECTION */
-.hero {
-  display: flex;
-  flex-wrap: wrap;          /* stacks on very small screens */
-  gap: 24px;                /* spacing between text & image */
-  align-items: flex-start;
-}
-
-.hero-content {
-  flex: 1 1 0;              /* fill remaining space */
-  min-width: 300px;         /* prevent squishing */
-}
-
-.hero-image {
-  flex: 0 0 300px;          /* fixed width */
-  height: 300px;            /* fixed square */
-}
-
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--radius);
-}
-
-/* EXHIBITIONS & COLLECTIONS BAR */
-.pane-bar {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;          /* stacks on mobile */
-}
-
-.pane-card {
-  flex: 1 1 0;              /* equal width columns */
-  background: var(--paper);
-  border-radius: var(--radius);
-  padding: 32px;
-  box-shadow: var(--shadow);
-}
-
-/* EDUCATION / HONORS / TEACHING: force horizontal layout */
-.doors {
-  display: flex;
-  flex-wrap: nowrap;        /* keep all three side by side */
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.doors .door {
-  flex: 1 1 0;              /* equal width for each door */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background: var(--paper);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow);
-  text-align: left;
-  min-width: 0;             /* prevent overflow */
-}
-
-/* FULL-WIDTH BUTTONS (Other Artists / Navigation) */
-.doors.navigation {
-  flex-direction: column;   /* stacked full-width buttons */
-}
-
-.doors.navigation .door {
-  text-align: center;
-}
-
-/* RESPONSIVE */
-@media (max-width: 980px) {
-  .hero {
-    flex-direction: column;       /* stack hero image & text */
-  }
-  .pane-bar {
-    flex-direction: column;       /* stack Exhibitions & Collections */
-  }
-  .doors {
-    flex-direction: column;       /* stack Education/Honors/Teaching */
-  }
-}
-
-/* Bottom navigation buttons: horizontal full-width */
-.doors.navigation {
-  display: flex;
-  gap: 24px; /* space between buttons */
-}
-
-.doors.navigation .door {
-  flex: 1 1 0;  /* each door takes equal width */
-  text-align: center;
-  padding: 24px;
-  background: var(--paper);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-</style>
 </head>
+
 
 <body>
 
+  <!-- ===============================
+       4. NAVIGATION
+       =============================== -->
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="Home">
@@ -152,25 +37,35 @@ main {
     </div>
   </nav>
 
-  <main>
+  <!-- ===============================
+       5. HERO SECTION / INTRO
+       =============================== -->
+  <header class="hero" role="banner">
+    <div>
+      <h2>Robert de Laverne</h2>
+      <p class="lead">
+        Robert dedicated his life to the meticulous documentation and lived experience of the specimen that was Bob Cremean.  
+        Within the estate archives and writings attributed to him—often under the pen name <em>Marc William Meredith</em>—Robert’s work stands as a singular testament to the life, studio practice, and intellectual contours of Cremean’s art.
+      </p>
+      <p class="lead">
+        Though little formal biography survives for Robert outside of his engagement with Cremean’s oeuvre, what remains is an extraordinary corpus of journals, essays, and unpublished narratives.  
+        Across thousands of manuscript pages, correspondence, and annotated visual records, Robert charted Cremean’s development, motivations, and creative process with a rigor that mirrors the discipline of scholarship and the intimacy of lived friendship.
+      </p>
+    </div>
 
-    <!-- Hero / Intro with image -->
-<section class="hero">
-  <div class="hero-content">
-    <h2>Robert De Lavergne</h2>
-    <p class="lead">
-      Writer, Photographer, Caretaker, and Biographer Robert De Lavergne was dedicated to one thing: Robert "Bob" Cremean. Through the entirity of their lives - Robert was always a fountation for Bob to grow from.
-      In his limited work outside of the subject of his long term husband, Robert occupies a distinctive position in postwar American literature, marked by rigorous formal, and symbolic density, with extreme sustained engagement with moral & value structures.
-    </p>
-  </div>
+    <aside class="pane" aria-label="Robert’s Legacy">
+      <div class="section">
+        <h3>Robert’s Legacy</h3>
+        <p>
+          Robert’s archives function as an essential counterpoint to the artistic archive of Cremean himself.  
+          For researchers, curators, and historians, the unpublished journals and annotated collections offer insight into the <em>interpreted life</em> of an artist whose work often resists easy categorization.
+        </p>
+      </div>
+    </aside>
+  </header>
 
-  <div class="hero-image">
-    <img src="/materials/photos/RobertPic.jpg" alt="Young RDLV">
-  </div>
-</section>
-
-    <!-- ===============================
-       PEN NAME / WRITING SECTION
+  <!-- ===============================
+       6. PEN NAME / WRITING SECTION
        =============================== -->
   <section class="doors" aria-label="Pen Name and Literary Practice">
     <a class="door">
@@ -184,8 +79,10 @@ main {
       </span>
     </a>
   </section>
-  </main>
 
+  <!-- ===============================
+       8. FOOTER
+       =============================== -->
   <footer>
     © 2026 · Bob & Robert — The Virtual Estate · Catalog V-001
   </footer>

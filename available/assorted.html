@@ -1,406 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Assorted Works | Bob & Robert</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A selection of smaller works available for acquisition."/>
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <!-- ===============================
+       1. META & TITLE
+       =============================== -->
+  <meta charset="utf-8">
+  <title>Materials | Bob & Robert</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Supplemental publications, writings, and archival materials connected to the Bob & Robert estate."/>
 
-<style>
+  <!-- ===============================
+       2. FONTS
+       =============================== -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 
-:root{
-  --wall:#f3efe9;
-  --paper:#fffdf9;
-  --ink:#1b1816;
-  --muted:#6f675f;
-  --accent:#b48a5a;
-  --frame:#e3ddd5;
-  --max:1180px;
-  --shadow:0 14px 40px rgba(0,0,0,.08);
-  --radius:16px;
-}
+  <!-- ===============================
+       3. EXTERNAL CSS
+       =============================== -->
+  <link rel="stylesheet" href="../style.css">
 
-*{box-sizing:border-box;margin:0;padding:0;}
-
-body{
-  font-family:Inter,system-ui;
-  background:var(--wall);
-  color:var(--ink);
-  line-height:1.7;
-}
-
-/* NAV */
-
-.nav{
-  position:sticky;
-  top:0;
-  z-index:30;
-  background:rgba(243,239,233,.9);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid rgba(0,0,0,.06);
-}
-
-.nav-inner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:14px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.brand{
-  display:flex;
-  align-items:baseline;
-  gap:12px;
-}
-
-.brand h1{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  line-height:1;
-}
-
-.brand .sub{
-  color:var(--muted);
-  font-size:.9rem;
-}
-
-.nav ul{
-  list-style:none;
-  display:flex;
-  gap:22px;
-}
-
-.nav a{
-  text-decoration:none;
-  color:var(--muted);
-  font-weight:600;
-  font-size:.95rem;
-}
-
-.nav a:hover{color:var(--ink);}
-
-/* HEADER */
-
-header{
-  max-width:var(--max);
-  margin:50px auto 24px;
-  padding:0 24px;
-}
-
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:40px;
-}
-
-.lead{
-  color:var(--muted);
-  max-width:70ch;
-  margin-top:8px;
-}
-
-/* GRID */
-
-.gallery{
-  max-width:var(--max);
-  margin:0 auto 80px;
-  padding:0 24px;
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:28px;
-}
-
-.work{
-  background:var(--paper);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-}
-
-.work img{
-  width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  border-bottom:1px solid var(--frame);
-}
-
-.work-body{
-  padding:16px;
-}
-
-.work-title{
-  font-family:'Playfair Display',serif;
-  font-size:20px;
-  margin-bottom:4px;
-}
-
-.work-meta{
-  font-size:.85rem;
-  color:var(--muted);
-  margin-bottom:10px;
-}
-
-.price{
-  font-weight:600;
-  font-size:1rem;
-  margin-bottom:10px;
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:8px 12px;
-  border-radius:10px;
-  font-weight:600;
-  font-size:.85rem;
-  text-decoration:none;
-  background:var(--ink);
-  color:#fff;
-}
-
-/* FOOTER */
-
-footer{
-  padding:24px;
-  background:#efeae3;
-  border-top:1px solid rgba(0,0,0,.08);
-  text-align:center;
-  color:var(--muted);
-  font-size:.9rem;
-}
-
-/* RESPONSIVE */
-
-@media (max-width:980px){
-  .gallery{
-    grid-template-columns:repeat(2, 1fr);
-  }
-}
-
-@media (max-width:640px){
-  .gallery{
-    grid-template-columns:1fr;
-  }
-}
-
-/* SUPPLEMENTAL MATERIALS */
-
-.supplemental{
-  max-width:var(--max);
-  margin:0 auto 100px;
-  padding:0 24px;
-}
-
-.supplemental-header{
-  text-align:center;
-  margin-bottom:36px;
-}
-
-.supplemental-header h2{
-  font-family:'Playfair Display',serif;
-  font-size:34px;
-  margin-bottom:10px;
-}
-
-.supplemental-header p{
-  color:var(--muted);
-  max-width:65ch;
-  margin:0 auto;
-}
-
-.material-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:28px;
-  margin-bottom:60px;
-}
-
-.material{
-  background:var(--paper);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:20px;
-  text-align:center;
-}
-
-.material h3{
-  font-family:'Playfair Display',serif;
-  font-size:20px;
-  margin-bottom:8px;
-}
-
-.material p{
-  font-size:.9rem;
-  color:var(--muted);
-  margin-bottom:12px;
-}
-
-.collection-offer{
-  text-align:center;
-  background:var(--paper);
-  padding:50px 24px;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
-
-.collection-offer h3{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  margin-bottom:12px;
-}
-
-.collection-offer p{
-  color:var(--muted);
-  max-width:60ch;
-  margin:0 auto 24px;
-}
-
-.collection-price{
-  font-weight:600;
-  font-size:1.2rem;
-  margin-bottom:20px;
-}
-
-.btn-large{
-  padding:14px 28px;
-  font-size:1rem;
-  border-radius:12px;
-}
-
-@media (max-width:980px){
-  .material-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media (max-width:640px){
-  .material-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-
-</style>
 </head>
+
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="/">
-      <h1>Bob & Robert</h1>
-      <span class="sub">The Virtual Estate</span>
-    </a>
-    <ul>
-      <li><a href="/available/">Available</a></li>
-      <li><a href="/collection/">Collection</a></li>
-      <li><a href="/materials/">Materials</a></li>
-      <li><a href="/contact.html">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<header>
-  <h1>Assorted Works</h1>
-  <p class="lead">
-    A curated selection of smaller works, studies, and material explorations available for acquisition.
-  </p>
-</header>
-
-<section class="gallery">
-
-  <!-- WORK 1 -->
-  <div class="work">
-    <img src="/works/assorted/work1.jpg" alt="Work 1">
-    <div class="work-body">
-      <div class="work-title">Untitled Study I</div>
-      <div class="work-meta">Mixed Media on Panel · 2016</div>
-      <div class="price">$2,400</div>
-      <a class="btn" href="mailto:?subject=Inquiry%3A%20Untitled%20Study%20I">Inquire</a>
+  <!-- ===============================
+       4. NAVIGATION
+       =============================== -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="Home">
+        <h1>Bob & Robert</h1>
+        <span class="sub">The Virtual Estate</span>
+      </a>
+      <ul>
+        <li><a href="/available/available.html">Available</a></li>
+        <li><a href="/collection/collection.html">Collection</a></li>
+        <li><a href="/materials/materials.html">Materials</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
     </div>
-  </div>
+  </nav>
 
-  <!-- WORK 2 -->
-  <div class="work">
-    <img src="/works/assorted/work2.jpg" alt="Work 2">
-    <div class="work-body">
-      <div class="work-title">Ash Figure (Small)</div>
-      <div class="work-meta">Pigment & Plaster · 2018</div>
-      <div class="price">$3,100</div>
-      <a class="btn" href="mailto:?subject=Inquiry%3A%20Ash%20Figure%20Small">Inquire</a>
+
+  <!-- ===============================
+       5. HERO
+       =============================== -->
+  <header class="hero">
+
+    <div>
+      <h2>Supplemental Materials</h2>
+
+      <p class="lead">
+        Publications, lecture transcripts, and archival documents expanding the conceptual and historical context of the work.  
+        These materials function as extensions of the studio practice — collectible documents accompanying the visual body of work.
+      </p>
     </div>
-  </div>
 
-  <!-- WORK 3 -->
-  <div class="work">
-    <img src="/works/assorted/work3.jpg" alt="Work 3">
-    <div class="work-body">
-      <div class="work-title">Tablet Fragment</div>
-      <div class="work-meta">Marble & Pigment · 2015</div>
-      <div class="price">$1,850</div>
-      <a class="btn" href="mailto:?subject=Inquiry%3A%20Tablet%20Fragment">Inquire</a>
-    </div>
-  </div>
+    <aside class="pane">
+      <img
+        src="/materials/photos/materialscover.jpg"
+        alt="Supplemental materials catalog"
+        class="catalog-image">
+    </aside>
 
-</section>
+  </header>
 
-<section class="supplemental">
 
-  <div class="supplemental-header">
-    <h2>Supplemental Materials</h2>
-    <p>
-      Printed matter, lectures, and archival publications expanding upon the conceptual framework of the work. 
-      These materials function as extensions of the studio practice — contextual, theoretical, and collectible.
-    </p>
-  </div>
+  <!-- ===============================
+       6. MATERIAL ITEMS
+       =============================== -->
+  <section class="doors">
 
-  <div class="material-grid">
-
-    <div class="material">
+    <a class="door" href="mailto:?subject=Inquiry%3A%20Promotional%20Book%20I">
       <h3>Promotional Book I</h3>
-      <p>Softcover publication featuring essays, process documentation, and installation views.</p>
-      <div class="price">$45</div>
-      <a class="btn" href="mailto:?subject=Inquiry%3A%20Promotional%20Book%20I">Inquire</a>
-    </div>
+      <span>Studio essays, installation documentation · $45</span>
+    </a>
 
-    <div class="material">
+    <a class="door" href="mailto:?subject=Inquiry%3A%20Lecture%20Transcript%20Series">
       <h3>Lecture Transcript Series</h3>
-      <p>Bound transcript from selected public lectures discussing material philosophy and form.</p>
-      <div class="price">$35</div>
-      <a class="btn" href="mailto:?subject=Inquiry%3A%20Lecture%20Transcript">Inquire</a>
-    </div>
+      <span>Public lecture transcripts discussing material philosophy · $35</span>
+    </a>
 
-    <div class="material">
+    <a class="door" href="mailto:?subject=Inquiry%3A%20Studio%20Archive%20Booklet">
       <h3>Studio Archive Booklet</h3>
-      <p>Limited booklet containing early sketches, notes, and documentation from the archive.</p>
-      <div class="price">$40</div>
-      <a class="btn" href="mailto:?subject=Inquiry%3A%20Studio%20Archive%20Booklet">Inquire</a>
-    </div>
+      <span>Early sketches and archival notes · $40</span>
+    </a>
 
-  </div>
-
-  <div class="collection-offer">
-    <h3>The Cremean Collection</h3>
-    <p>
-      A complete set of all currently available supplemental materials — assembled as a unified archive. 
-      Intended as a comprehensive entry point into the extended body of work.
-    </p>
-    <div class="collection-price">$150 — Complete Set</div>
-    <a class="btn btn-large" href="mailto:?subject=Inquiry%3A%20Cremean%20Collection">Acquire the Full Collection</a>
-  </div>
-
-</section>
+  </section>
 
 
-<footer>
-  © 2026 · Bob & Robert — The Virtual Estate
-</footer>
+  <!-- ===============================
+       7. COLLECTION OFFER
+       =============================== -->
+  <section class="doors">
+
+    <a class="door" href="mailto:?subject=Inquiry%3A%20Cremean%20Collection">
+
+      <h3>The Cremean Collection</h3>
+
+      <span>
+        Complete set of all supplemental publications.  
+        Intended as a unified archival entry point into the extended body of work.  
+        · $150 Complete Set
+      </span>
+
+    </a>
+
+  </section>
+
+
+  <!-- ===============================
+       8. FOOTER
+       =============================== -->
+  <footer>
+    © 2026 · Bob & Robert — The Virtual Estate · Catalog V-001
+  </footer>
 
 </body>
 </html>
