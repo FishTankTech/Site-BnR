@@ -149,32 +149,67 @@ h1{
   background:var(--paper);
 }
 
+/* Inquire */
+
+.inquire{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid var(--frame);
+}
+
+.pane[aria-label="Details"]{
+  display:flex;
+  flex-direction:column;
+}
+
+.inquire{
+  margin-top:auto;
+  padding-top:18px;
+  border-top:1px solid var(--frame);
+  display:flex;
+  justify-content:center;   /* centers the button horizontally */
+}
+
+.inquire .btn{
+  padding:16px 36px;        /* was 10px 12px */
+  font-size:1.05rem;        /* was .9rem */
+  border-radius:12px;
+  letter-spacing:.02em;
+  transition:background .2s ease, transform .2s ease;
+}
+
+.inquire .btn:hover{
+  background:var(--accent);
+  transform:translateY(-1px);
+}
+
+
+
 /* THUMBNAILS — FOUR PER ROW */
 
 .stills{
-  margin-top:8px;
+  flex:1;                       /* take up all leftover height in the column */
   display:grid;
-  grid-template-columns:repeat(4, 1fr); /* exactly four across */
+  grid-template-columns:repeat(4, 1fr);
+  grid-auto-rows:1fr;           /* both rows share that height equally */
   gap:10px;
 }
 
-.still{
+.stills a{
+  position:relative;
+  display:block;
+  min-height:90px;              /* floor so they never collapse */
+}
+
+.stills img{
+  position:absolute;
+  inset:0;                      /* image fills its tile, whatever its native size */
   width:100%;
+  height:100%;
   object-fit:cover;
   border-radius:8px;
   box-shadow:var(--shadow);
   border:1px solid var(--frame);
-  display:block;
-}
-
-.stills a{
-  display:flex;
-}
-
-.stills img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
 }
 
 
@@ -422,8 +457,12 @@ footer{
       <div class="field"><div class="label">Description</div><div>A maquette from the continuing analysis of 8/6/45, the dropping of an atomic bomb on Hiroshima</div></div>
       <div class="field"><div class="label">Provenance</div><div>Studio, The Virtual Estate - Housed in NC</div></div>
       <div class="field"><div class="label">Availability</div><div>Available for acquisition</div></div>
-      <p style="margin-top:12px"><a class="btn" href="mailto:?subject=Inquiry%3A%20Maquette%20for%20the%20End%20Of%20Time">Inquire about this work</a></p>
-    </aside>
+      
+      <div class="inquire">
+      <a class="btn" href="mailto:?subject=Inquiry%3A%20Narcissus%20In%20Flagronte'">Inquire about this work</a>
+      </div> 
+
+  </aside>
   </main>
 
   <section class="layout synopsis" aria-label="Synopsis and notes" style="margin-bottom:100px">
@@ -436,7 +475,7 @@ footer{
         Patriarchy’s grave lies in the blood and rubble of Hiroshima, beneath a poisoned cock of smoke.”</p>
 
     </article>
-    <aside class="pane">
+        <aside class="pane">
       <h2 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px">Technical Notes</h2>
       <ul style="margin-left:18px">
         <li>Deminsions: The entire piece stands at a hight of 65 & 1/2 inches - The Base, at its widest is 60 inches in Diameter.</li>

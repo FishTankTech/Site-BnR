@@ -140,13 +140,47 @@ h1{
 
 .still-main img{
   width:100%;
-  max-width:900px;       /* controls the “slightly smaller” size */
-  aspect-ratio:16/9;
-  object-fit:cover;
+  max-width:900px;
+  height:auto;
+  object-fit:contain;
   border-radius:12px;
   box-shadow:var(--shadow);
   border:1px solid var(--frame);
   background:var(--paper);
+}
+
+/* INQUIRE */
+
+.inquire{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid var(--frame);
+}
+
+.pane[aria-label="Details"]{
+  display:flex;
+  flex-direction:column;
+}
+
+.inquire{
+  margin-top:auto;
+  padding-top:18px;
+  border-top:1px solid var(--frame);
+  display:flex;
+  justify-content:center;   /* centers the button horizontally */
+}
+
+.inquire .btn{
+  padding:16px 36px;        /* was 10px 12px */
+  font-size:1.05rem;        /* was .9rem */
+  border-radius:12px;
+  letter-spacing:.02em;
+  transition:background .2s ease, transform .2s ease;
+}
+
+.inquire .btn:hover{
+  background:var(--accent);
+  transform:translateY(-1px);
 }
 
 /* THUMBNAILS — FOUR PER ROW */
@@ -369,47 +403,33 @@ footer{
 </header>
 
 
-  <main class="layout">
- <div class="media-stack">
+<main class="layout">
+  <div class="media-stack">
 
-  <!-- MAIN IMAGE -->
-  <div class="still-main">
-    <a href="/works/narcissus/6195517746_cd99bb2903.jpg" class="lightbox">
-      <img src="/works/narcissus/6195517746_cd99bb2903.jpg" alt="Artwork 1">
-    </a>
+    <!-- MAIN IMAGE -->
+    <div class="still-main">
+      <a href="/works/narcissus/Narcissus.jpg" class="lightbox">
+        <img src="/works/narcissus/Narcissus.jpg" alt="Narcissus In Flagronte">
+      </a>
+    </div>
+
+    <!-- THUMBNAILS -->
+    <div class="stills" aria-label="Stills">
+      <a href="/works/narcissus/6195547440_10667258d4_w.jpg" class="lightbox">
+        <img src="/works/narcissus/6195547440_10667258d4_w.jpg" alt="Artwork 1" class="still">
+      </a>
+      <a href="/works/narcissus/6194953497_286a57be66_w.jpg" class="lightbox">
+        <img src="/works/narcissus/6194953497_286a57be66_w.jpg" alt="Artwork 2" class="still">
+      </a>
+      <a href="/works/narcissus/6194956893_6a059c60b0_z.jpg" class="lightbox">
+        <img src="/works/narcissus/6194956893_6a059c60b0_z.jpg" alt="Artwork 3" class="still">
+      </a>
+      <a href="/works/narcissus/6195491966_c43f0cf443_n.jpg" class="lightbox">
+        <img src="/works/narcissus/6195491966_c43f0cf443_n.jpg" alt="Artwork 4" class="still">
+      </a>
+    </div>
+
   </div>
-
-  <!-- THUMBNAILS -->
-  <div class="stills" aria-label="Stills">
-    <a href="/works/maquette/M4T-not-even-death-attended.jpg" class="lightbox">
-      <img src="/works/maquette/M4T-not-even-death-attended.jpg" alt="Artwork 1" class="still">
-    </a>
-    <a href="/works/maquette/M4T-we-were-erased.jpg" class="lightbox">
-      <img src="/works/maquette/M4T-we-were-erased.jpg" alt="Artwork 2" class="still">
-    </a>
-    <a href="/works/maquette/M4T-figurefront.jpg" class="lightbox">
-      <img src="/works/maquette/M4T-figurefront.jpg" alt="Artwork 4" class="still">
-    </a>
-    <a href="/works/maquette/M4T-figurerear.jpg" class="lightbox">
-      <img src="/works/maquette/M4T-figurerear.jpg" alt="Artwork 2" class="still">
-    </a>
-        <a href="/works/maquette/M4T-base-i-am-ashamed.jpg" class="lightbox">
-      <img src="/works/maquette/M4T-base-i-am-ashamed.jpg" alt="Artwork 3" class="still">
-    </a>
-    <a href="/works/maquette/M4T-heads.jpg" class="lightbox">
-      <img src="/works/maquette/M4T-heads.jpg" alt="Artwork 2" class="still">
-    </a>
-    <a href="/works/maquette/M4T-hiroshimabasetext.jpg" class="lightbox">
-      <img src="/works/maquette/M4T-hiroshimabasetext.jpg" alt="Artwork 2" class="still">
-    </a>
-    <a href="/works/maquette/M4T-tablet1.jpg" class="lightbox">
-      <img src="/works/maquette/M4T-tablet1.jpg" alt="Artwork 2" class="still">
-    </a>
-  </div>
-
-</div>
-
-
 
     <aside class="pane" aria-label="Details">
       <div class="field"><div class="label">Artist</div><div class="value">Robert Cremean</div></div>
@@ -417,31 +437,35 @@ footer{
       <div class="field"><div class="label">Year</div><div class="value">2009</div></div>
       <div class="field"><div class="label">Format</div><div class="value">Partial Installation</div></div>
       <div class="field"><div class="label">Installation</div><div>Individual Huminoid Figure</div></div>
-      <div class="field"><div class="label">Viewing</div><div>The six figures are arranged in a non-hierarchical ring, denying a single “front” and requiring the viewer to circulate.</div></div>
+      <div class="field"><div class="label">Viewing</div><div>A Single sculpture that denies any standard "Viewing angle". The sculpture is defined at all sides, encouraging you to inspect it from all perspectives.</div></div>
       <div class="field"><div class="label">Studio Edition</div><div>Dorothy Laughing (2009-2015)</div></div>
-      <div class="field"><div class="label">Description</div><div>A maquette from the continuing analysis of 8/6/45, the dropping of an atomic bomb on Hiroshima</div></div>
+      <div class="field"><div class="label">Description</div><div>A retelling of the Greek myth of Narcissus, the namesake for the self centered phycological condition "narcissism"</div></div>
       <div class="field"><div class="label">Provenance</div><div>Studio, The Virtual Estate - Housed in NC</div></div>
       <div class="field"><div class="label">Availability</div><div>Available for acquisition</div></div>
-      <p style="margin-top:12px"><a class="btn" href="mailto:?subject=Inquiry%3Narcissus%20In%20Flagronte'">Inquire about this work</a></p>
+      
+      <div class="inquire">
+      <a class="btn" href="mailto:?subject=Inquiry%3A%20Narcissus%20In%20Flagronte'">Inquire about this work</a>
+      </div>
+
     </aside>
   </main>
 
   <section class="layout synopsis" aria-label="Synopsis and notes" style="margin-bottom:100px">
     <article class="pane">
       <h2>Synopsis</h2>
-      <p>No specific event in the history of mankind has so concerned Robert Cremean as that memorialized in MAQUETTE FOR THE END OF TIME. It is a continuing analysis of 8/6/45, the dropping of the bomb on Hiroshima.
-        <br> <br>“We live in an age of miracles... August 6th, 1945. Born in a searing flash of light - Thousands upon thousands of men, women and children were consumed in this cataclysmic change of metaphors. 
-        God, like an ancient ruler incarnate, adorned his death with innocents, and their blood colors this new age. How old he was! As old as human fear. 
-        And though fear still holds us enthralled, we are no longer free to worship it. God is dead and, with him, men in His image.
-        Patriarchy’s grave lies in the blood and rubble of Hiroshima, beneath a poisoned cock of smoke.”</p>
+      <p>The Greek myth of Narcissus has been written about since first penned. He was pictured as a beautiful youth at one time heartbroken at the death of his (most often) male lover and at others by the death of his female lover. 
+        Culture-makers have always thrived on adapting almost everything to their own cause or metaphor, including by our most noted formative psychiatrists and by countless others making "narcissism" an everyday clinical and cultural cliché.
+        Perhaps Narcissus is best known for having seen his image in still waters, that he became so hopelessly enamored of himself that he stared at his image until his death.
+        <br> <br>
+        Here, The myth is again revisited. But in this retelling, it is his reflection in the pond that speaks. "All the metaphors have changed." Mirroring man-kind, Narcissus seems unaware of that fact.</p>
 
     </article>
-    <aside class="pane">
+<aside class="pane">
       <h2 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px">Technical Notes</h2>
       <ul style="margin-left:18px">
-        <li>Deminsions: The entire piece stands at a hight of 65 & 1/2 inches - The Base, at its widest is 60 inches in Diameter.</li>
-        <br><li>Delivery: This installation is housed in 7 (seven) seperate shipping items. Included in the accuisition are the Housing Bonsai Shipping Crates</li>
-        <br><li>Material: Conclusive Pigment And Ash for Color | A Wooden (Walnut) Base | Plaster & Mache Figures | Marble Tablets, & Context </li>
+        <li>Deminsions: This sculpture stands at a hight of 71 inches, while at its widest (midpoint sculpture base) it is 25 inches in width, and 23 inches in depth.</li>
+        <br><li>Delivery: This installation is housed in one shipping item, and can be moved by a single person, or pair of people.</li>
+        <br><li>Material: Conclusive Pigment, Ash, and Granite Powder for Color | Plaster & Mache Figure Tooling | Marble Tablets, & Context </li>
       </ul>
     </aside>
   </section>
