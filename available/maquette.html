@@ -382,9 +382,9 @@ footer{
         <span class="sub">The Virtual Estate</span>
       </a>
       <ul>
-        <li><a href="/available/">Available</a></li>
-        <li><a href="/collection/">Collection</a></li>
-        <li><a href="/materials/">Materials</a></li>
+        <li><a href="/available">Available</a></li>
+        <li><a href="/collection">Collection</a></li>
+        <li><a href="/materials">Materials</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>
     </div>
@@ -500,7 +500,7 @@ const prevBtn = lightbox.querySelector('.lb-prev');
 const nextBtn = lightbox.querySelector('.lb-next');
 
 // Collect all your images into an array
-const links = Array.from(document.querySelectorAll('.stills .lightbox'));
+const links = Array.from(document.querySelectorAll('.still-main .lightbox, .stills .lightbox'));
 let currentIndex = 0;
 
 function openLightbox(index) {
@@ -545,6 +545,15 @@ lightbox.addEventListener('click', () => {
 
 // Prevent closing when clicking the image itself
 lightboxImg.addEventListener('click', e => e.stopPropagation());
+
+// Keyboard control
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('active')) return;
+
+  if (e.key === 'ArrowRight') showNext();
+  else if (e.key === 'ArrowLeft') showPrev();
+  else if (e.key === 'Escape') lightbox.classList.remove('active');
+});
 </script>
 
 

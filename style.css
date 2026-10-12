@@ -14,6 +14,8 @@
   --radius: 16px;
 }
 
+
+
 /* ===============================
    2. RESET & BASE STYLES
    =============================== */
@@ -96,6 +98,12 @@ header.hero {
   gap: 48px;
 }
 
+@media (max-width: 980px) {
+  header.hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 header.hero h2 {
   font-family: 'Playfair Display', serif;
   font-size: 56px;
@@ -111,31 +119,22 @@ header.hero h2 {
 /* ===============================
    5. PANE & CATALOG IMAGE
    =============================== */
+   
 .pane {
-  background: var(--paper);
-  width: 400px;
-  height: 280px;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-self: start;
-  overflow: hidden; /* critical for image masking */
+  width: 100%;
+  max-width: 400px;      /* replaces width: 400px */
+  aspect-ratio: 10 / 7;  /* replaces height: 280px */
+  overflow: hidden;
+}
+
+.catalog-image {
+  width: 100%;
+  max-width: 240px;      /* the cap */
+  height: auto;
 }
 
 header.hero aside.pane {
   margin-top: -28px;
-}
-
-.catalog-image {
-  width: 240px; /* intentional object size */
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 16px;
-  transform: rotate(-90deg);
-  transform-origin: center;
 }
 
 /* ===============================
