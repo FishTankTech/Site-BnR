@@ -1,91 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- ===============================
-       1. META & TITLE
-       =============================== -->
-  <meta charset="utf-8">
-  <title>Bob & Robert | The Virtual Estate</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portal to the Bob & Robert collection: Available works, full collection, supplemental materials, and acquisitions contact."/>
 
-  <!-- ===============================
-       2. FONTS
-       =============================== -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <!-- ==========================================================================
+       PAGE: Bob & Robert | The Virtual Estate  (Home / Portal)
+       ==========================================================================
 
+       TABLE OF CONTENTS
+       --------------------------------------------------------------------------
+       HEAD
+         1.  META & TITLE ............ charset, viewport, SEO description
+         2.  FONTS ................... Google Fonts (Inter + Playfair Display)
+         3.  EXTERNAL CSS ............ site-wide stylesheet
+         4.  PAGE-SPECIFIC CSS ....... hero image frame overrides (inline)
 
-  <!-- ===============================
-       3. EXTERNAL CSS
-       =============================== -->
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<style>
-
-.pane {
-  width: 100%;
-  max-width: 400px;
-  padding: 12px;              /* replaces the 16px border */
-  border-radius: 28px;        /* outer curve */
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  isolation: isolate;
-  box-sizing: border-box;
-}
+       BODY
+         5.  NAVIGATION .............. sticky top bar
+         6.  HERO SECTION ............ headline, intro, catalog cover image
+         7.  MAIN DOORS .............. primary section links
+         8.  ABOUT THE ARTISTS ....... artist bio links
+         9.  FOOTER ................... copyright / catalog number
+       ========================================================================== -->
 
 
-.catalog-image {
-  align-items: center;
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 16px;        /* outer radius minus padding, so the curves are concentric */
-}
+  <head>
 
-header.hero aside.pane {
-  width: 100%;
-  max-width: 560px;
-  aspect-ratio: auto;          /* let the photo decide the height */
-  height: fit-content;
-  align-self: center;
-  justify-self: center;
-  margin-top: 0;
-  background: #fffdf8;         /* replaces the magenta */
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  padding: 14px;               /* this is your mat, equal on all sides */
-  border-radius: 28px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-  isolation: isolate;
-  box-sizing: border-box;
-}
+    <!-- ======================================================================
+         1. META & TITLE
+         ====================================================================== -->
 
-header.hero aside.pane img.catalog-image {
-  position: static !important;
-  display: block !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: auto !important;
-  transform: none !important;
-  border-radius: 14px;
-}
+    <!-- Character encoding: must be declared early in <head> -->
+    <meta charset="utf-8">
 
-  /* Nav: stack brand over links, links scroll if needed */
-  .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 16px; }
-  .brand .sub { display: none; }
-  .nav ul { gap: 18px; width: 100%; overflow-x: auto; white-space: nowrap; }
-  .nav a { display: inline-block; padding: 6px 0; }
-  
-  </style>
+    <!-- Browser tab / search result title -->
+    <title>Bob &amp; Robert | The Virtual Estate</title>
 
-<body>
+    <!-- Mobile scaling: render at device width, no zoom-out on load -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-  <!-- ===============================
-       4. NAVIGATION
-       =============================== -->
-  <nav class="nav" aria-label="Primary">
+    <!-- Search engine snippet -->
+    <meta
+      name="description"
+      content="Portal to the Bob &amp; Robert collection: Available works, full collection, supplemental materials, and acquisitions contact.">
+
+
+    <!-- ======================================================================
+         2. FONTS
+         Inter (body text): weights 300, 400, 600
+         Playfair Display (headings): 600 regular + 600 italic
+         ====================================================================== -->
+
+    <!-- Open the connection to the font host early for faster loading -->
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+    <!-- The font stylesheet itself; display=swap shows fallback text until loaded -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap">
+
+
+    <!-- ======================================================================
+         3. EXTERNAL CSS
+         Site-wide styles: tokens, nav, hero layout, doors, footer.
+         Loaded BEFORE the inline block below so the inline rules can
+         override it where needed.
+         ====================================================================== -->
+    <link
+      rel="stylesheet"
+      href="style.css">
+
+
+    <!-- ======================================================================
+         4. PAGE-SPECIFIC CSS (inline)
+         Frame styling for the hero "catalog cover" image.
+         Overrides the .pane / .catalog-image rules from style.css.
+
+         Anatomy of the frame (outside in):
+           aside.pane            -> outer rounded frame, border, shadow
+             padding (the "mat") -> cream border around the photo
+               img.catalog-image -> the photo, with its own rounded corners
+         ====================================================================== -->
+    <style>
+
+      /* ---------------------------------------------------------------------
+         4.1 BASE PANE
+         Generic frame used anywhere .pane appears on the site.
+         --------------------------------------------------------------------- */
+      .pane {
+        width: 100%;
+        max-width: 400px;
+        padding: 12px;                  /* replaces the 16px border */
+        border-radius: 28px;            /* outer curve */
+        box-shadow: var(--shadow);      /* token defined in style.css */
+        overflow: hidden;               /* clips the image to the rounded corners */
+        isolation: isolate;             /* new stacking context; keeps clipping clean */
+        box-sizing: border-box;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.2 BASE CATALOG IMAGE
+         Photo inside any .pane.
+         --------------------------------------------------------------------- */
+      .catalog-image {
+        align-items: center;            /* no effect on a plain <img>; kept from original */
+        display: block;                 /* removes the tiny gap under inline images */
+        width: 100%;
+        height: auto;                   /* preserve aspect ratio */
+        border-radius: 16px;            /* outer radius minus padding, so the curves are concentric */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.3 HERO PANE (overrides 4.1 for the hero only)
+         More specific selector (header.hero aside.pane) wins over .pane.
+         --------------------------------------------------------------------- */
+      header.hero aside.pane {
+
+        /* --- Sizing --- */
+        width: 100%;
+        max-width: 560px;               /* wider than the base 400px */
+        aspect-ratio: auto;             /* let the photo decide the height */
+        height: fit-content;
+
+        /* --- Placement inside the hero grid --- */
+        align-self: center;
+        justify-self: center;
+        margin-top: 0;                  /* cancels the -28px nudge from style.css */
+
+        /* --- Frame appearance --- */
+        background: #fffdf8;            /* replaces the magenta */
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        padding: 14px;                  /* this is your mat, equal on all sides */
+        border-radius: 28px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+
+        /* --- Clipping / stacking --- */
+        overflow: hidden;
+        isolation: isolate;
+        box-sizing: border-box;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.4 HERO IMAGE (forced overrides)
+         !important is used so no other stylesheet can reposition, resize,
+         or transform the hero photo.
+         --------------------------------------------------------------------- */
+      header.hero aside.pane img.catalog-image {
+        position: static !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;     /* removes the 240px cap from style.css */
+        height: auto !important;
+        transform: none !important;
+        border-radius: 14px;            /* pane radius minus padding, concentric curves */
+      }
+
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <!-- ======================================================================
+         5. NAVIGATION
+         Sticky bar: brand on the left, four page links on the right.
+         ====================================================================== -->
+      <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="Home">
         <h1>Bob & Robert</h1>
@@ -101,69 +188,130 @@ header.hero aside.pane img.catalog-image {
   </nav>
 
 
-  <!-- ===============================
-       5. HERO SECTION
-       =============================== -->
-  <header class="hero" role="banner">
-    <div>
-      <h2>Works by Robert Cremean & Robert de Laverne</h2>
-      <p class="lead">A focused presentation of significant pieces drawn from the studio and estate. Explore available works, browse the full collection, and consult supplemental materials including sketchbooks and writings.</p>
-    </div>
+    <!-- ======================================================================
+         6. HERO SECTION
+         Two columns on desktop (text | image), stacked on tablet/mobile.
+         ====================================================================== -->
+    <header
+      class="hero"
+      role="banner">
 
-    <aside class="pane" aria-label="Catalog cover image">
-      <img
-        src="/materials/photos/bestbobpic.jpg"
-        alt="Virtual Collection Catalog V-001 – evolving gallery cover"
-        class="catalog-image">
-    </aside>
-  </header>
+      <!-- Left column: headline + intro paragraph -->
+      <div>
 
+        <h2>Works by Robert Cremean &amp; Robert de Laverne</h2>
 
-  <!-- ===============================
-       6. MAIN DOORS / LINKS
-       =============================== -->
-  <section class="doors">
-    <a class="door" href="/available/available.html">
-      <h3>Available for Acquisition</h3>
-      <span>Curator’s picks and inventory</span>
-    </a>
-    <a class="door" href="collection/collection.html">
-      <h3>Collection (In Development)</h3>
-      <span>Browse the survey</span>
-    </a>
-    <a class="door" href="/materials/materials.html">
-      <h3>Materials</h3>
-      <span>Sketchbooks, writings, press</span>
-    </a>
-    <a class="door" href="contact.html">
-      <h3>Contact</h3>
-      <span>Acquisitions & inquiries</span>
-    </a>
-  </section>
+        <p class="lead">
+          A focused presentation of significant pieces drawn from the studio and estate.
+          Explore available works, browse the full collection, and consult supplemental
+          materials including sketchbooks and writings.
+        </p>
+
+      </div>
+
+      <!-- Right column: framed catalog cover image (see CSS section 4) -->
+      <aside
+        class="pane"
+        aria-label="Catalog cover image">
+
+        <img
+          class="catalog-image"
+          src="/materials/photos/bestbobpic.jpg"
+          alt="Virtual Collection Catalog V-001 – evolving gallery cover">
+
+      </aside>
+
+    </header>
 
 
-  <!-- ===============================
-       7. ABOUT THE ARTISTS SECTION
-       =============================== -->
-  <section class="doors" aria-label="About the artists">
-    <a class="door" href="robert.html">
-      <h3>Robert de Laverne</h3>
-      <span>All About</span>
-    </a>
+    <!-- ======================================================================
+         7. MAIN DOORS
+         Primary entry points. Each "door" is one clickable card.
+         ====================================================================== -->
+    <section class="doors">
 
-    <a class="door" href="bob.html">
-      <h3>"Bob" Cremean</h3>
-      <span>All About</span>
-    </a>
-  </section>
+      <!-- Door 1: Available works -->
+      <a
+        class="door"
+        href="/available/available.html">
 
-  
-  <!-- ===============================
-       8. FOOTER
-       =============================== -->
-  <footer>
-    © 2026 · Bob & Robert — The Virtual Estate · Catalog V-001
-  </footer>
+        <h3>Available for Acquisition</h3>
+        <span>Curator’s picks and inventory</span>
 
-</body>
+      </a>
+
+      <!-- Door 2: Full collection (page still in progress) -->
+      <a
+        class="door"
+        href="collection/collection.html">
+
+        <h3>Collection (In Development)</h3>
+        <span>Browse the survey</span>
+
+      </a>
+
+      <!-- Door 3: Supplemental materials -->
+      <a
+        class="door"
+        href="/materials/materials.html">
+
+        <h3>Materials</h3>
+        <span>Sketchbooks, writings, press</span>
+
+      </a>
+
+      <!-- Door 4: Contact -->
+      <a
+        class="door"
+        href="contact.html">
+
+        <h3>Contact</h3>
+        <span>Acquisitions &amp; inquiries</span>
+
+      </a>
+
+    </section>
+
+
+    <!-- ======================================================================
+         8. ABOUT THE ARTISTS
+         Reuses the .doors grid for two artist bio cards.
+         ====================================================================== -->
+    <section
+      class="doors"
+      aria-label="About the artists">
+
+      
+      <!-- Artist 1 -->
+      <a
+        class="door"
+        href="robert.html">
+
+        <h3>Robert de Laverne</h3>
+        <span>All About</span>
+
+      </a>
+
+      <!-- Artist 2 -->
+      <a
+        class="door"
+        href="bob.html">
+
+        <h3>"Bob" Cremean</h3>
+        <span>All About</span>
+
+      </a>
+
+    </section>
+
+
+    <!-- ======================================================================
+         9. FOOTER
+         ====================================================================== -->
+    <footer>
+      © 2026 · Bob &amp; Robert — The Virtual Estate · Catalog V-001
+    </footer>
+
+  </body>
+
 </html>

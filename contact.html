@@ -1,38 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Contact | Bob & Robert</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Acquisitions and inquiries for the Bob & Robert estate."/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-  <style>
-    :root{--wall:#f3efe9;--paper:#fffdf9;--ink:#1b1816;--muted:#6f675f;--accent:#b48a5a;--frame:#e3ddd5;--max:820px;--shadow:0 14px 40px rgba(0,0,0,.08);--radius:16px}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Inter,system-ui;background:var(--wall);color:var(--ink);line-height:1.7}
-    .brand{display:flex;align-items:baseline;gap:12px}
-    .brand h1{font-family:'Playfair Display',serif;font-size:28px;line-height:1}
-    .brand .sub{color:var(--muted);font-size:.9rem;letter-spacing:.02em}
-    .nav ul{list-style:none;display:flex;gap:22px}
-    .nav a{text-decoration:none;color:var(--muted);font-weight:600;font-size:.95rem}
-    .nav a:hover{color:var(--ink)}
-    main{max-width:var(--max);margin:60px auto;padding:0 24px;display:grid;gap:18px}
-    .pane{background:var(--paper);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
-    h1{font-family:'Playfair Display',serif;font-size:44px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;background:var(--ink);color:#fff}
-    footer{margin:0;padding:24px;background:#efeae3;border-top:1px solid rgba(0,0,0,.08);text-align:center;color:var(--muted);font-size:.9rem}
-  
-/* Nav V3: stack brand over links, links scroll if needed */
-  .nav{position:sticky;top:0;z-index:30;background:rgba(243,239,233,.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.06)}
-    .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 16px; }
-    .brand .sub { display: none; }
-    .nav ul { gap: 18px; width: 100%; overflow-x: auto; white-space: nowrap; }
-    .nav a { display: inline-block; padding: 6px 0; }
-  
-  </style>
-</head>
-<body>
+
+  <!-- ==========================================================================
+       PAGE: Contact | Bob & Robert  (Acquisitions & Inquiries)
+       ==========================================================================
+
+       TABLE OF CONTENTS
+       --------------------------------------------------------------------------
+       HEAD
+         1.  META & TITLE ............ charset, viewport, SEO description
+         2.  FONTS ................... Google Fonts (Inter + Playfair Display)
+         3.  EXTERNAL CSS ............ shared site stylesheet (style.css)
+         4.  PAGE-SPECIFIC CSS ....... contact page styles (inline)
+               4.1  Page tokens
+               4.2  Brand tweaks
+               4.3  Main layout
+               4.4  Pane (card) overrides
+               4.5  Headings & text
+               4.6  Buttons
+               4.7  FAQ accordions
+               4.8  Address block
+
+       BODY
+         5.  NAVIGATION .............. sticky top bar
+         6.  MAIN CONTENT
+               6.1  Acquisitions & Inquiries (intro + email buttons)
+               6.2  What to include
+               6.3  Frequently asked
+               6.4  Mailing address
+         7.  FOOTER
+       ========================================================================== -->
+
+
+  <head>
+
+    <!-- ======================================================================
+         1. META & TITLE
+         ====================================================================== -->
+
+    <!-- Character encoding: must be declared early in <head> -->
+    <meta charset="utf-8">
+
+    <!-- Browser tab / search result title -->
+    <title>Contact | Bob &amp; Robert</title>
+
+    <!-- Mobile scaling: render at device width, no zoom-out on load -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+    <!-- Search engine snippet -->
+    <meta
+      name="description"
+      content="Acquisitions and inquiries for the Bob &amp; Robert estate.">
+
+
+    <!-- ======================================================================
+         2. FONTS
+         Inter (body text): weights 300, 400, 600
+         Playfair Display (headings): 600 regular + 600 italic
+         ====================================================================== -->
+
+    <!-- Open the connection to the font host early for faster loading -->
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+    <!-- The font stylesheet itself; display=swap shows fallback text until loaded -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap">
+
+
+    <!-- ======================================================================
+         3. EXTERNAL CSS
+         Shared site stylesheet. It now supplies everything this page used to
+         define on its own: color tokens, reset, body, nav bar, brand, footer.
+         Loaded BEFORE the inline block so the page-specific rules below win.
+         ====================================================================== -->
+    <link
+      rel="stylesheet"
+      href="style.css">
+
+
+    <!-- ======================================================================
+         4. PAGE-SPECIFIC CSS (inline)
+         Only rules that are unique to the contact page live here.
+         ====================================================================== -->
+    <style>
+
+      /* ---------------------------------------------------------------------
+         4.1 PAGE TOKENS
+         A page-local content width. Deliberately NOT named --max, because
+         overriding --max would also narrow the nav bar (which uses it in
+         style.css) and make it differ from the other pages.
+         --------------------------------------------------------------------- */
+      :root {
+        --page-max: 820px;              /* narrow, single-column reading width */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.2 BRAND TWEAKS
+         Small additions on top of the shared .brand styles.
+         --------------------------------------------------------------------- */
+      .brand h1 {
+        line-height: 1;                 /* tight leading so title and subtitle align */
+      }
+
+      .brand .sub {
+        letter-spacing: .02em;          /* slight tracking on the subtitle */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.3 MAIN LAYOUT
+         Centered single column; each <section class="pane"> is a row
+         separated by an 18px gap.
+         --------------------------------------------------------------------- */
+      main {
+        max-width: var(--page-max);
+        margin: 60px auto;
+        padding: 0 24px;
+        display: grid;
+        gap: 18px;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.4 PANE (CARD)
+         White rounded card with a soft shadow.
+         style.css also defines .pane for the homepage hero image (400px max
+         width, 10:7 aspect ratio, clipped overflow). Those three properties
+         are reset here so the text cards can size to their content.
+         --------------------------------------------------------------------- */
+      .pane {
+        background: var(--paper);
+        border-radius: var(--radius);
+        padding: 22px;
+        box-shadow: var(--shadow);
+
+        /* --- Reset homepage hero-pane behavior from style.css --- */
+        max-width: none;
+        aspect-ratio: auto;
+        overflow: visible;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.5 HEADINGS & TEXT
+         --------------------------------------------------------------------- */
+
+      /* Page title (the single large heading in the first card) */
+      main h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 44px;
+      }
+
+      /* Card sub-headings ("What to include", "Frequently asked", ...) */
+      .pane h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px;
+        margin-bottom: 8px;
+      }
+
+      /* Bulleted list inside a card */
+      .pane ul {
+        margin-left: 18px;              /* indent bullets */
+      }
+
+      /* Small gray note under a list or address */
+      .note {
+        margin-top: 10px;
+        color: var(--muted);
+      }
+
+      .note--tight {
+        margin-top: 8px;                /* slightly closer variant (used under the address) */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.6 BUTTONS
+         Pill-style mailto buttons. Three shades of dark, one per inquiry type.
+         --------------------------------------------------------------------- */
+
+      /* Row that holds the buttons; wraps on narrow screens */
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      /* Base button (also used by the shared stylesheet's mobile rules) */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: .9rem;
+        text-decoration: none;
+        background: var(--ink);         /* "Acquisitions" uses the default */
+        color: #fff;
+      }
+
+      .btn--research { background: #1f2328; }
+      .btn--press    { background: #3b3f45; }
+
+
+      /* ---------------------------------------------------------------------
+         4.7 FAQ ACCORDIONS
+         Native <details>/<summary> toggles; no JavaScript needed.
+         --------------------------------------------------------------------- */
+      .faq details {
+        margin-bottom: 8px;
+      }
+
+      .faq details:last-child {
+        margin-bottom: 0;               /* no trailing gap after the final item */
+      }
+
+      .faq details p {
+        margin-top: 6px;                /* space between the question and its answer */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.8 ADDRESS BLOCK
+         --------------------------------------------------------------------- */
+      .pane address {
+        font-style: normal;             /* <address> is italic by default */
+        color: #3b3733;                 /* slightly darker than --muted for legibility */
+      }
+
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <!-- ======================================================================
+         5. NAVIGATION
+         Sticky bar: brand on the left, four page links on the right.
+         Styled by style.css (section 3 there).
+         ====================================================================== -->
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="Home">
@@ -40,64 +256,163 @@
         <span class="sub">The Virtual Estate</span>
       </a>
       <ul>
-        <li><a href="/available.html">Available</a></li>
-        <li><a href="/collection.html">Collection</a></li>
-        <li><a href="/materials.html">Materials</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/available/available.html">Available</a></li>
+        <li><a href="/collection/collection.html">Collection</a></li>
+        <li><a href="/materials/materials.html">Materials</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <main>
-    <section class="pane">
-      <h1>Acquisitions & Inquiries</h1>
-      <p>A dedicated channel for collectors, institutions, and researchers. We can provide dossiers (images, specs, provenance, and condition), viewing guidance, and installation notes for sculpture, works on paper, and AV works.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
-        <a class="btn" href="mailto:TheCremeanEstate@gmail.com?subject=Acquisition%20Inquiry%20%E2%80%93%20Bob%20%26%20Robert">Acquisitions</a>
-        <a class="btn" href="mailto:TheCremeanEstate@gmail.com?subject=Research%20Request%20%E2%80%93%20Bob%20%26%20Robert" style="background:#1f2328">Research</a>
-        <a class="btn" href="mailto:TheCremeanEstate@gmail.com?subject=Press%20Inquiry%20%E2%80%93%20Bob%20%26%20Robert" style="background:#3b3f45">Press</a>
-      </div>
-    </section>
 
-    <section class="pane">
-      <h2 style="font-family:'Playfair Display',serif;font-size:26px;margin-bottom:8px">What to include</h2>
-      <ul style="margin-left:18px">
-        <li>Work title and year (or a link to the item on this site)</li>
-        <li>Intended context (private collection, institutional collection, exhibition)</li>
-        <li>Preferred timeline and any logistical notes (shipping, installation constraints)</li>
-        <li>If requesting a dossier: specify image needs (overall, details, verso), and any forms required</li>
-      </ul>
-      <p style="margin-top:10px;color:#6f675f">Typical response: 1–3 business days. For time-sensitive requests, please include “URGENT” in the subject line.</p>
-    </section>
+    <!-- ======================================================================
+         6. MAIN CONTENT
+         Four stacked cards (.pane).
+         ====================================================================== -->
+    <main>
 
-    <section class="pane">
-      <h2 style="font-family:'Playfair Display',serif;font-size:26px;margin-bottom:8px">Frequently asked</h2>
-      <details style="margin-bottom:8px"><summary><strong>Pricing and availability</strong></summary>
-        <p style="margin-top:6px">Pricing is provided upon request. Some works are reserved or under review. If you are interested in a specific piece, please reference its title and year.</p>
-      </details>
-      <details style="margin-bottom:8px"><summary><strong>Condition and conservation</strong></summary>
-        <p style="margin-top:6px">Condition summaries are included in dossiers. Full reports with conservation notes and high-resolution images can be prepared for institutional review.</p>
-      </details>
-      <details style="margin-bottom:8px"><summary><strong>Viewing</strong></summary>
-        <p style="margin-top:6px">Studio viewings and virtual walkthroughs can be arranged by appointment. Installation views for select works are available in the Materials section.</p>
-      </details>
-      <details><summary><strong>Loan requests</strong></summary>
-        <p style="margin-top:6px">For exhibition loans, include venue, dates, loan conditions, and insurance certificate. Lead time of 6–10 weeks is preferred.</p>
-      </details>
-    </section>
+      <!-- ====================================================================
+           6.1 ACQUISITIONS & INQUIRIES
+           Intro paragraph + three mailto buttons. Each button pre-fills the
+           email subject line (%20 = space, %E2%80%93 = en dash, %26 = &).
+           ==================================================================== -->
+      <section class="pane">
 
-    <section class="pane">
-      <h2 style="font-family:'Playfair Display',serif;font-size:26px;margin-bottom:8px">Mailing address</h2>
-      <address style="font-style:normal;color:#3b3733">
-        The Virtual Cremean Estate: Bob & Robert<br>
-        4 Ridgeway Drive<br>
-        Weaverville, NC - 28787<br>
-        United States
-      </address>
-      <p style="margin-top:8px;color:#6f675f">Physical submissions & Form requests are accepted by appointment; please email before sending materials.</p>
-    </section>
-  </main>
+        <h1>Acquisitions &amp; Inquiries</h1>
 
-  <footer>© 2026 · Bob & Robert — The Virtual Estate</footer>
-</body>
+        <p>
+          A dedicated channel for collectors, institutions, and researchers. We can provide
+          dossiers (images, specs, provenance, and condition), viewing guidance, and
+          installation notes for sculpture, works on paper, and AV works.
+        </p>
+
+        <div class="btn-row">
+
+          <a
+            class="btn"
+            href="mailto:TheCremeanEstate@gmail.com?subject=Acquisition%20Inquiry%20%E2%80%93%20Bob%20%26%20Robert">
+            Acquisitions
+          </a>
+
+          <a
+            class="btn btn--research"
+            href="mailto:TheCremeanEstate@gmail.com?subject=Research%20Request%20%E2%80%93%20Bob%20%26%20Robert">
+            Research
+          </a>
+
+          <a
+            class="btn btn--press"
+            href="mailto:TheCremeanEstate@gmail.com?subject=Press%20Inquiry%20%E2%80%93%20Bob%20%26%20Robert">
+            Press
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- ====================================================================
+           6.2 WHAT TO INCLUDE
+           Checklist for people writing in.
+           ==================================================================== -->
+      <section class="pane">
+
+        <h2>What to include</h2>
+
+        <ul>
+          <li>Work title and year (or a link to the item on this site)</li>
+          <li>Intended context (private collection, institutional collection, exhibition)</li>
+          <li>Preferred timeline and any logistical notes (shipping, installation constraints)</li>
+          <li>If requesting a dossier: specify image needs (overall, details, verso), and any forms required</li>
+        </ul>
+
+        <p class="note">
+          Typical response: 1–3 business days. For time-sensitive requests, please include
+          “URGENT” in the subject line.
+        </p>
+
+      </section>
+
+
+      <!-- ====================================================================
+           6.3 FREQUENTLY ASKED
+           Four collapsible questions (click a question to reveal its answer).
+           ==================================================================== -->
+      <section class="pane faq">
+
+        <h2>Frequently asked</h2>
+
+        <!-- Q1 -->
+        <details>
+          <summary><strong>Pricing and availability</strong></summary>
+          <p>
+            Pricing is provided upon request. Some works are reserved or under review.
+            If you are interested in a specific piece, please reference its title and year.
+          </p>
+        </details>
+
+        <!-- Q2 -->
+        <details>
+          <summary><strong>Condition and conservation</strong></summary>
+          <p>
+            Condition summaries are included in dossiers. Full reports with conservation
+            notes and high-resolution images can be prepared for institutional review.
+          </p>
+        </details>
+
+        <!-- Q3 -->
+        <details>
+          <summary><strong>Viewing</strong></summary>
+          <p>
+            Studio viewings and virtual walkthroughs can be arranged by appointment.
+            Installation views for select works are available in the Materials section.
+          </p>
+        </details>
+
+        <!-- Q4 -->
+        <details>
+          <summary><strong>Loan requests</strong></summary>
+          <p>
+            For exhibition loans, include venue, dates, loan conditions, and insurance
+            certificate. Lead time of 6–10 weeks is preferred.
+          </p>
+        </details>
+
+      </section>
+
+
+      <!-- ====================================================================
+           6.4 MAILING ADDRESS
+           ==================================================================== -->
+      <section class="pane">
+
+        <h2>Mailing address</h2>
+
+        <address>
+          The Virtual Cremean Estate: Bob &amp; Robert<br>
+          4 Ridgeway Drive<br>
+          Weaverville, NC - 28787<br>
+          United States
+        </address>
+
+        <p class="note note--tight">
+          Physical submissions &amp; Form requests are accepted by appointment;
+          please email before sending materials.
+        </p>
+
+      </section>
+
+    </main>
+
+
+    <!-- ======================================================================
+         7. FOOTER
+         Styled by style.css (section 8 there).
+         ====================================================================== -->
+    <footer>
+      © 2026 · Bob &amp; Robert — The Virtual Estate
+    </footer>
+
+  </body>
+
 </html>

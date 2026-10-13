@@ -1,154 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- ===============================
-       1. META & TITLE
-       =============================== -->
-  <meta charset="utf-8">
-  <title>Robert de Laverne | Bob & Robert</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="All about Robert de Laverne, chronicler and documentarian of Bob Cremean’s life and work." />
 
-  <!-- ===============================
-       2. FONTS
-       =============================== -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <!-- ==========================================================================
+       PAGE: "Bob" Cremean | Bob & Robert  (Artist biography page)
+       ==========================================================================
 
-  <!-- ===============================
-       3. EXTERNAL CSS
-       =============================== -->
-  <link rel="stylesheet" href="style.css">
-  
-<style>
+       TABLE OF CONTENTS
+       --------------------------------------------------------------------------
+       HEAD
+         1.  META & TITLE ............ charset, viewport, SEO description
+         2.  FONTS ................... Google Fonts (Inter + Playfair Display)
+         3.  EXTERNAL CSS ............ site-wide stylesheet
+         4.  PAGE-SPECIFIC CSS ....... layout for this page (inline)
+               4.1  Main content wrapper
+               4.2  Hero (text + portrait)
+               4.3  Exhibitions & Collections cards
+               4.4  Biography "doors" (Education / Honors / Teaching)
+               4.5  Navigation doors (stacked variant)
+               4.6  Responsive overrides
 
-/* Nav V3: stack brand over links, links scroll if needed */
-  .nav{position:sticky;top:0;z-index:30;background:rgba(243,239,233,.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.06)}
-    .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 16px; }
-    .brand .sub { display: none; }
-    .nav ul { gap: 18px; width: 100%; overflow-x: auto; white-space: nowrap; }
-    .nav a { display: inline-block; padding: 6px 0; }
-  
-
-/* MAIN CONTENT: add spacing from page edges */
-main {
-  max-width: var(--max);
-  margin: 64px auto 100px;  /* centers content */
-  padding: 0 32px;          /* spacing from page sides */
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-
-/* HERO SECTION */
-.hero {
-  display: flex;
-  flex-wrap: wrap;          /* stacks on very small screens */
-  gap: 24px;                /* spacing between text & image */
-  align-items: flex-start;
-}
-
-.hero-content {
-  flex: 1 1 0;              /* fill remaining space */
-  min-width: 300px;         /* prevent squishing */
-}
-
-.hero-image {
-  flex: 0 0 300px;          /* fixed width */
-  height: 300px;            /* fixed square */
-}
-
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--radius);
-}
-
-/* EXHIBITIONS & COLLECTIONS BAR */
-.pane-bar {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;          /* stacks on mobile */
-}
-
-.pane-card {
-  flex: 1 1 0;              /* equal width columns */
-  background: var(--paper);
-  border-radius: var(--radius);
-  padding: 32px;
-  box-shadow: var(--shadow);
-}
-
-/* EDUCATION / HONORS / TEACHING: force horizontal layout */
-.doors {
-  display: flex;
-  flex-wrap: nowrap;        /* keep all three side by side */
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.doors .door {
-  flex: 1 1 0;              /* equal width for each door */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background: var(--paper);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow);
-  text-align: left;
-  min-width: 0;             /* prevent overflow */
-}
-
-/* FULL-WIDTH BUTTONS (Other Artists / Navigation) */
-.doors.navigation {
-  flex-direction: column;   /* stacked full-width buttons */
-}
-
-.doors.navigation .door {
-  text-align: center;
-}
-
-/* RESPONSIVE */
-@media (max-width: 980px) {
-  .hero {
-    flex-direction: column;       /* stack hero image & text */
-  }
-  .pane-bar {
-    flex-direction: column;       /* stack Exhibitions & Collections */
-  }
-  .doors {
-    flex-direction: column;       /* stack Education/Honors/Teaching */
-  }
-}
-
-/* Bottom navigation buttons: horizontal full-width */
-.doors.navigation {
-  display: flex;
-  gap: 24px; /* space between buttons */
-}
-
-.doors.navigation .door {
-  flex: 1 1 0;  /* each door takes equal width */
-  text-align: center;
-  padding: 24px;
-  background: var(--paper);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+       BODY
+         5.  NAVIGATION .............. sticky top bar
+         6.  MAIN CONTENT
+               6.1  Hero / intro with portrait
+               6.2  Exhibitions & Collections
+               6.3  Education / Honors / Teaching
+         7.  FOOTER
+       ========================================================================== -->
 
 
+  <head>
 
-</style>
-</head>
+    <!-- ======================================================================
+         1. META & TITLE
+         ====================================================================== -->
 
-<body>
+    <!-- Character encoding: must be declared early in <head> -->
+    <meta charset="utf-8">
 
+    <!-- Browser tab / search result title -->
+    <title>"Bob" Cremean | Bob &amp; Robert</title>
+
+    <!-- Mobile scaling: render at device width, no zoom-out on load -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+    <!-- Search engine snippet
+         NOTE: this text describes Robert de Laverne, not Bob Cremean.
+         Kept as in the original; update it to match this page. -->
+    <meta
+      name="description"
+      content="All about Robert de Laverne, chronicler and documentarian of Bob Cremean’s life and work.">
+
+
+    <!-- ======================================================================
+         2. FONTS
+         Inter (body text): weights 300, 400, 600
+         Playfair Display (headings): 600 regular + 600 italic
+         ====================================================================== -->
+
+    <!-- Open the connection to the font host early for faster loading -->
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+    <!-- The font stylesheet itself; display=swap shows fallback text until loaded -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap">
+
+
+    <!-- ======================================================================
+         3. EXTERNAL CSS
+         Site-wide styles: tokens (--max, --paper, --radius, --shadow), nav,
+         footer, and the base .doors / .door styles that this page overrides.
+         Loaded BEFORE the inline block below so the inline rules win.
+         ====================================================================== -->
+    <link
+      rel="stylesheet"
+      href="style.css">
+
+
+    <!-- ======================================================================
+         4. PAGE-SPECIFIC CSS (inline)
+         Overrides and additions for the biography layout.
+         Note: .doors here is switched from the grid in style.css to flexbox.
+         ====================================================================== -->
+    <style>
+
+      /* ---------------------------------------------------------------------
+         4.1 MAIN CONTENT WRAPPER
+         Centers the page content and spaces it from the screen edges.
+         Children (hero, pane-bar, doors) are stacked with a 48px gap.
+         --------------------------------------------------------------------- */
+      main {
+        max-width: var(--max);
+        margin: 64px auto 100px;        /* centers content */
+        padding: 0 32px;                /* spacing from page sides */
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.2 HERO
+         Text on the left, fixed-size portrait on the right.
+         (Separate from the homepage's header.hero grid; this one is a
+         <section class="hero"> using flexbox.)
+         --------------------------------------------------------------------- */
+      .hero {
+        display: flex;
+        flex-wrap: wrap;                /* stacks on very small screens */
+        gap: 24px;                      /* spacing between text & image */
+        align-items: flex-start;
+      }
+
+      .hero-content {
+        flex: 1 1 0;                    /* fill remaining space */
+        min-width: 300px;               /* prevent squishing */
+      }
+
+      .hero-image {
+        flex: 0 0 300px;                /* fixed width */
+        height: 300px;                  /* fixed square */
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;              /* fill the square, crop the excess */
+        border-radius: var(--radius);
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.3 EXHIBITIONS & COLLECTIONS BAR
+         Two equal-width cards side by side.
+         --------------------------------------------------------------------- */
+      .pane-bar {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;                /* stacks on mobile */
+      }
+
+      .pane-card {
+        flex: 1 1 0;                    /* equal width columns */
+        background: var(--paper);
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: var(--shadow);
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.4 BIOGRAPHY DOORS  (Education / Honors / Teaching)
+         Three equal cards forced into one horizontal row.
+         --------------------------------------------------------------------- */
+      .doors {
+        display: flex;
+        flex-wrap: nowrap;              /* keep all three side by side */
+        gap: 24px;
+        margin-top: 32px;
+      }
+
+      .doors .door {
+        flex: 1 1 0;                    /* equal width for each door */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background: var(--paper);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+        text-align: left;
+        min-width: 0;                   /* prevent overflow */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.5 NAVIGATION DOORS  (.doors.navigation variant)
+         Full-width centered buttons, e.g. "Other Artists" links.
+         NOTE: no element on this page currently uses .navigation; the rules
+         are kept for reuse. In the original file this block appeared twice
+         (once before and once after the media query). The two copies are
+         merged here with identical resulting behavior.
+         The original comment said "horizontal", but the effective layout
+         has always been a vertical stack (flex-direction: column).
+         --------------------------------------------------------------------- */
+      .doors.navigation {
+        display: flex;
+        flex-direction: column;         /* stacked full-width buttons */
+        gap: 24px;                      /* space between buttons */
+      }
+
+      .doors.navigation .door {
+        flex: 1 1 0;                    /* each door takes equal width/height share */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 24px;
+        background: var(--paper);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.6 RESPONSIVE
+         Placed LAST so it overrides the base rules above.
+         Tablet and below: every horizontal row becomes a vertical stack.
+         --------------------------------------------------------------------- */
+      @media (max-width: 980px) {
+
+        .hero {
+          flex-direction: column;       /* stack hero image & text */
+        }
+
+        .pane-bar {
+          flex-direction: column;       /* stack Exhibitions & Collections */
+        }
+
+        .doors {
+          flex-direction: column;       /* stack Education/Honors/Teaching */
+        }
+
+      }
+
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <!-- ======================================================================
+         5. NAVIGATION
+         Sticky bar: brand on the left, four page links on the right.
+         ====================================================================== -->
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="Home">
@@ -156,96 +249,155 @@ main {
         <span class="sub">The Virtual Estate</span>
       </a>
       <ul>
-        <li><a href="/available.html">Available</a></li>
-        <li><a href="/collection.html">Collection</a></li>
-        <li><a href="/materials.html">Materials</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/available/available.html">Available</a></li>
+        <li><a href="/collection/collection.html">Collection</a></li>
+        <li><a href="/materials/materials.html">Materials</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <main>
 
-    <!-- Hero / Intro with image -->
-<section class="hero">
-  <div class="hero-content">
-    <h2>Robert Cremean</h2>
-    <p class="lead">
-      Painter, sculptor, and printmaker Robert Cremean was born in Toledo, Ohio in 1932.  
-      His work occupies a distinctive position in postwar American art, marked by rigorous formal inquiry, symbolic density, and sustained engagement with mythic and moral structures.
-    </p>
-    <p class="lead">
-      Educated at Alfred University and the Cranbrook Academy of Art, Cremean received both his B.F.A. and M.F.A.  
-      Recognized through a Fulbright Scholarship to Rome and other fellowships, Cremean pursued themes of constraint, transformation, and human consequence with intellectual precision and material restraint.
-    </p>
-  </div>
+    <!-- ======================================================================
+         6. MAIN CONTENT
+         ====================================================================== -->
+    <main>
 
-  <div class="hero-image">
-    <img src="/materials/photos/hotbobpic.jpg" alt="Young Robert Cremean" />
-  </div>
-</section>
+      <!-- ====================================================================
+           6.1 HERO / INTRO WITH PORTRAIT
+           ==================================================================== -->
+      <section class="hero">
+
+        <!-- Left: name + two-paragraph biography intro -->
+        <div class="hero-content">
+
+          <h2>Robert Cremean</h2>
+
+          <p class="lead">
+            Painter, sculptor, and printmaker Robert Cremean was born in Toledo, Ohio in 1932.
+            His work occupies a distinctive position in postwar American art, marked by rigorous
+            formal inquiry, symbolic density, and sustained engagement with mythic and moral structures.
+          </p>
+
+          <p class="lead">
+            Educated at Alfred University and the Cranbrook Academy of Art, Cremean received both
+            his B.F.A. and M.F.A. Recognized through a Fulbright Scholarship to Rome and other
+            fellowships, Cremean pursued themes of constraint, transformation, and human consequence
+            with intellectual precision and material restraint.
+          </p>
+
+        </div>
+
+        <!-- Right: 300x300 portrait -->
+        <div class="hero-image">
+
+          <img
+            src="/materials/photos/hotbobpic.jpg"
+            alt="Young Robert Cremean">
+
+        </div>
+
+      </section>
 
 
-    <!-- Exhibitions & Collections side-by-side -->
-    <section class="pane-bar">
-      <div class="pane-card">
-        <h3>Selected Exhibitions</h3>
-        <ul>
-          <li>Toledo Museum of Art · Toledo, Ohio</li>
-          <li>Esther Robles Gallery · Los Angeles, California</li>
-          <li>Santa Barbara Museum of Art · Santa Barbara, California</li>
-          <li>National Gallery of Art · Melbourne, Australia</li>
-          <li>Phoenix Art Museum · Phoenix, Arizona</li>
-          <li>Crocker Art Museum · Sacramento, California</li>
-        </ul>
-      </div>
+      <!-- ====================================================================
+           6.2 EXHIBITIONS & COLLECTIONS
+           Two cards side by side (stacked below 980px).
+           ==================================================================== -->
+      <section class="pane-bar">
 
-      <div class="pane-card">
-        <h3>Public Collections</h3>
-        <ul>
-          <li>Los Angeles County Museum of Art</li>
-          <li>Metropolitan Museum of Art · New York</li>
-          <li>National Gallery of Victoria · Australia</li>
-          <li>Museum of Contemporary Art San Diego</li>
-          <li>Fine Arts Museums of San Francisco</li>
-          <li>Honolulu Academy of Art</li>
-        </ul>
-      </div>
-    </section>
+        <!-- Card 1: Selected Exhibitions -->
+        <div class="pane-card">
 
-    <!-- EDUCATION / HONORS / TEACHING -->
-    <section class="doors" aria-label="Biography Details">
-      <a class="door">
-        <h3>Education</h3>
-        <span>
-          1950–1952 · Alfred University<br>
-          1954 · Cranbrook Academy of Art, B.F.A.<br>
-          1956 · Cranbrook Academy of Art, M.F.A.
-        </span>
-      </a>
-      <a class="door">
-        <h3>Honors & Fellowships</h3>
-        <span>
-          1954 · Fulbright Scholarship, Rome, Italy<br>
-          1957 · Huntington Hartford Foundation Fellowship<br>
-          1966–1967 · Tamarind Workshop Fellowship
-        </span>
-      </a>
-      <a class="door">
-        <h3>Teaching</h3>
-        <span>
-          Detroit Institute of Art, Detroit, Michigan<br>
-          University of California, Los Angeles<br>
-          La Jolla Art Center, La Jolla, California
-        </span>
-      </a>
-    </section>
+          <h3>Selected Exhibitions</h3>
 
-  </main>
+          <ul>
+            <li>Toledo Museum of Art · Toledo, Ohio</li>
+            <li>Esther Robles Gallery · Los Angeles, California</li>
+            <li>Santa Barbara Museum of Art · Santa Barbara, California</li>
+            <li>National Gallery of Art · Melbourne, Australia</li>
+            <li>Phoenix Art Museum · Phoenix, Arizona</li>
+            <li>Crocker Art Museum · Sacramento, California</li>
+          </ul>
 
-  <footer>
-    © 2026 · Bob & Robert — The Virtual Estate · Catalog V-001
-  </footer>
+        </div>
 
-</body>
+        <!-- Card 2: Public Collections -->
+        <div class="pane-card">
+
+          <h3>Public Collections</h3>
+
+          <ul>
+            <li>Los Angeles County Museum of Art</li>
+            <li>Metropolitan Museum of Art · New York</li>
+            <li>National Gallery of Victoria · Australia</li>
+            <li>Museum of Contemporary Art San Diego</li>
+            <li>Fine Arts Museums of San Francisco</li>
+            <li>Honolulu Academy of Art</li>
+          </ul>
+
+        </div>
+
+      </section>
+
+
+      <!-- ====================================================================
+           6.3 EDUCATION / HONORS / TEACHING
+           Three equal cards in a row (stacked below 980px).
+           These reuse the .door card style but are not links (no href).
+           ==================================================================== -->
+      <section
+        class="doors"
+        aria-label="Biography Details">
+
+        <!-- Card 1: Education -->
+        <a class="door">
+
+          <h3>Education</h3>
+          <span>
+            1950–1952 · Alfred University<br>
+            1954 · Cranbrook Academy of Art, B.F.A.<br>
+            1956 · Cranbrook Academy of Art, M.F.A.
+          </span>
+
+        </a>
+
+        <!-- Card 2: Honors & Fellowships -->
+        <a class="door">
+
+          <h3>Honors &amp; Fellowships</h3>
+          <span>
+            1954 · Fulbright Scholarship, Rome, Italy<br>
+            1957 · Huntington Hartford Foundation Fellowship<br>
+            1966–1967 · Tamarind Workshop Fellowship
+          </span>
+
+        </a>
+
+        <!-- Card 3: Teaching -->
+        <a class="door">
+
+          <h3>Teaching</h3>
+          <span>
+            Detroit Institute of Art, Detroit, Michigan<br>
+            University of California, Los Angeles<br>
+            La Jolla Art Center, La Jolla, California
+          </span>
+
+        </a>
+
+      </section>
+
+    </main>
+
+
+    <!-- ======================================================================
+         7. FOOTER
+         ====================================================================== -->
+    <footer>
+      © 2026 · Bob &amp; Robert — The Virtual Estate · Catalog V-001
+    </footer>
+
+  </body>
+
 </html>

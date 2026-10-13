@@ -1,61 +1,96 @@
-/* ===============================
-   1. CSS VARIABLES
-   =============================== */
-:root {
-  --wall: #f3efe9;
-  --paper: #fffdf9;
-  --ink: #1b1816;
-  --muted: #6f675f;
-  --accent: #b48a5a;
-  --frame: #e3ddd5;
-  --max: 1180px;
-  --shadow: 0 14px 40px rgba(0,0,0,.08);
-  --shadow-lg: 0 30px 80px rgba(0,0,0,.14);
-  --radius: 16px;
+/* ==========================================================================
+   STYLESHEET: Gallery / Catalog Site
+   ==========================================================================
+
+   TABLE OF CONTENTS
+   --------------------------------------------------------------------------
+   1.  DESIGN TOKENS ........ CSS custom properties (colors, sizing, shadows)
+   2.  RESET & BASE ......... Box model reset, body defaults
+   3.  NAVIGATION ........... Sticky top bar, brand, link list
+   4.  HERO ................. Intro header, headline, lead paragraph
+   5.  PANE & IMAGES ........ Hero side image pane, catalog image
+   6.  STAMPS & LABELS ...... Small uppercase accent labels
+   7.  DOORS ................ Card grid linking to site sections
+   8.  FOOTER ............... Page footer
+   9.  RESPONSIVE ........... Tablet mobile (<=640px), touch devices
+
+
+/* ==========================================================================
+   1. DESIGN TOKENS
+   Central place for colors, layout width, shadows, and radii.
+   Change a value here and it updates everywhere it's used.
+   ========================================================================== */
+
+   :root {
+  /* --- Colors --- */
+  --wall:   #f3efe9;   /* page background (warm off-white, like a gallery wall) */
+  --paper:  #fffdf9;   /* card / surface background */
+  --ink:    #1b1816;   /* primary text */
+  --muted:  #6f675f;   /* secondary text, nav links */
+  --accent: #b48a5a;   /* brass/gold accent (stamps, highlights) */
+  --frame:  #e3ddd5;   /* borders / frame tone */
+
+  /* --- Layout --- */
+  --max: 1180px;       /* max content width for all major sections */
+
+  /* --- Shadows --- */
+  --shadow:    0 14px 40px rgba(0, 0, 0, .08);   /* resting elevation */
+  --shadow-lg: 0 30px 80px rgba(0, 0, 0, .14);   /* hover elevation */
+
+  /* --- Shape --- */
+  --radius: 16px;      /* default corner radius */
 }
 
 
+/* ==========================================================================
+   2. RESET & BASE
+   ========================================================================== */
 
-/* ===============================
-   2. RESET & BASE STYLES
-   =============================== */
+/* Universal reset: predictable sizing, no default spacing */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box;   /* padding/border included in element width */
   margin: 0;
   padding: 0;
 }
 
+/* Page defaults */
 body {
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--wall);
   color: var(--ink);
-  line-height: 1.7;
+  line-height: 1.7;         /* generous line height for readability */
 }
 
-/* ===============================
+
+/* ==========================================================================
    3. NAVIGATION
-   =============================== */
+   Sticky top bar with brand on the left, links on the right.
+   ========================================================================== */
+
+/* --- 3.1 Nav container (sticky, frosted-glass effect) --- */
 .nav {
   position: sticky;
   top: 0;
-  z-index: 30;
-  background: rgba(243,239,233,.9);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(0,0,0,.06);
+  z-index: 30;                              /* stay above page content */
+  background: rgba(243, 239, 233, .9);      /* --wall at 90% opacity */
+  backdrop-filter: blur(8px);               /* frosted blur behind the bar */
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
 }
 
+/* --- 3.2 Inner wrapper (centers content, aligns brand + links) --- */
 .nav-inner {
   max-width: var(--max);
   margin: 0 auto;
   padding: 14px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between;           /* brand left, links right */
 }
 
+/* --- 3.3 Brand (site title + optional subtitle) --- */
 .brand {
   display: flex;
-  align-items: baseline;
+  align-items: baseline;                    /* align title and subtitle text baselines */
   gap: 12px;
 }
 
@@ -69,6 +104,7 @@ body {
   font-size: 0.9rem;
 }
 
+/* --- 3.4 Nav links --- */
 .nav ul {
   list-style: none;
   display: flex;
@@ -83,82 +119,94 @@ body {
 }
 
 .nav a:hover {
-  color: var(--ink);
+  color: var(--ink);                        /* darken on hover */
 }
 
-/* ===============================
-   4. HERO SECTION
-   =============================== */
+
+/* ==========================================================================
+   4. HERO
+   Two-column intro: text on the left, image pane on the right.
+   ========================================================================== */
+
+/* --- 4.1 Hero layout --- */
 header.hero {
   max-width: var(--max);
   margin: 72px auto 40px;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.2fr 1fr;         /* text column slightly wider than image column */
   gap: 48px;
 }
 
-@media (max-width: 980px) {
-  header.hero {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
+/* --- 4.2 Hero headline --- */
 header.hero h2 {
   font-family: 'Playfair Display', serif;
   font-size: 56px;
-  line-height: 0.98;
+  line-height: 0.98;                        /* tight leading for large display type */
 }
 
+/* --- 4.3 Lead paragraph (intro text under headline) --- */
 .lead {
   margin-top: 16px;
   color: var(--muted);
-  max-width: 62ch;
+  max-width: 62ch;                          /* limits line length for readability */
 }
 
-/* ===============================
-   5. PANE & CATALOG IMAGE
-   =============================== */
-   
+
+/* ==========================================================================
+   5. PANE & IMAGES
+   Hero side image container and catalog thumbnail sizing.
+   ========================================================================== */
+
+/* --- 5.1 Pane (responsive image container) --- */
 .pane {
   width: 100%;
-  max-width: 400px;      /* replaces width: 400px */
-  aspect-ratio: 10 / 7;  /* replaces height: 280px */
-  overflow: hidden;
+  max-width: 400px;                         /* replaces fixed width: 400px */
+  aspect-ratio: 10 / 7;                     /* replaces fixed height: 280px */
+  overflow: hidden;                         /* crop anything that overflows the ratio */
 }
 
-.catalog-image {
-  width: 100%;
-  max-width: 240px;      /* the cap */
-  height: auto;
-}
-
+/* Nudges the hero pane upward so it aligns with the headline */
 header.hero aside.pane {
   margin-top: -28px;
 }
 
-/* ===============================
-   6. STAMPS / LABELS
-   =============================== */
+/* --- 5.2 Catalog image (scales fluidly, capped in size) --- */
+.catalog-image {
+  width: 100%;
+  max-width: 240px;                         /* the size cap */
+  height: auto;                             /* preserve aspect ratio */
+}
+
+
+/* ==========================================================================
+   6. STAMPS & LABELS
+   Small, spaced-out uppercase labels in the accent color.
+   ========================================================================== */
 .stamp {
   font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.14em;                   /* wide tracking for a "stamped" look */
   color: var(--accent);
 }
 
-/* ===============================
-   7. DOORS / SECTIONS
-   =============================== */
+
+/* ==========================================================================
+   7. DOORS
+   Responsive grid of linked cards that lead to site sections.
+   ========================================================================== */
+
+/* --- 7.1 Grid container --- */
 .doors {
   max-width: var(--max);
   margin: 14px auto 100px;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));  /* as many 240px+ columns as fit */
   gap: 26px;
 }
 
+/* --- 7.2 Individual door card --- */
 .door {
   background: var(--paper);
   padding: 28px;
@@ -167,14 +215,16 @@ header.hero aside.pane {
   color: var(--ink);
   box-shadow: var(--shadow);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
-  display: block;
+  display: block;                           /* makes the whole <a> a clickable block */
 }
 
+/* Lift effect on hover */
 .door:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
 }
 
+/* --- 7.3 Door content --- */
 .door h3 {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
@@ -187,36 +237,110 @@ header.hero aside.pane {
 }
 
 
-
-
-/* ===============================
+/* ==========================================================================
    8. FOOTER
-   =============================== */
+   ========================================================================== */
 footer {
   margin: 0;
   padding: 28px 24px;
-  background: linear-gradient(180deg, #efeae3, #e7e1d9);
-  border-top: 1px solid rgba(0,0,0,.08);
+  background: linear-gradient(180deg, #efeae3, #e7e1d9);   /* subtle top-to-bottom warm gradient */
+  border-top: 1px solid rgba(0, 0, 0, .08);
   text-align: center;
   color: var(--muted);
   font-size: 0.9rem;
 }
 
-/* ===============================
+
+/* ==========================================================================
    9. RESPONSIVE
-   =============================== */
-@media(max-width: 980px) {
+   Ordered large to small so smaller breakpoints override larger ones.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   9.1 TABLET & BELOW (max-width: 980px)
+   Hero collapses to a single column; type scales down.
+   -------------------------------------------------------------------------- */
+@media (max-width: 980px) {
   header.hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);  /* single column; minmax(0,..) prevents content overflow */
     gap: 28px;
     margin-top: 48px;
+  }
+
+  header.hero h2 {
+    font-size: 40px;
   }
 
   .brand h1 {
     font-size: 24px;
   }
+}
 
-  header.hero h2 {
-    font-size: 40px;
+/* --------------------------------------------------------------------------
+   9.2 MOBILE (max-width: 640px)
+   Tighter gutters, stacked nav, larger tap targets.
+   -------------------------------------------------------------------------- */
+
+   @media (max-width: 640px) {
+
+  /* --- Page gutters / spacing --- */
+  header     { margin: 32px auto 16px; padding: 0 16px; }
+  .grid      { padding: 0 16px; gap: 18px; margin-bottom: 56px; }
+  .secondary { padding: 0 16px; margin: -24px auto 56px; }
+
+  /* --- Nav: stack brand over links; links scroll sideways if they overflow --- */
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .brand .sub { display: none; }            /* hide subtitle to save space */
+  .nav ul {
+    gap: 18px;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .nav a {
+    display: inline-block;
+    padding: 6px 0;
+  }
+
+  /* --- Bigger, full-width tap targets --- */
+  .actions { gap: 10px; }
+  .btn {
+    flex: 1;
+    min-height: 44px;                       /* recommended minimum touch target */
+    font-size: 1rem;
+  }
+
+  /* --- Media: show whole sculptures instead of cropping --- */
+  .media {
+    aspect-ratio: 1 / 1;
+    background: #f7f3ee;
+  }
+  .media img {
+    object-fit: contain !important;         /* !important overrides inline/base cropping */
+    border-radius: 0 !important;
+  }
+
+  /* --- Tile: call-to-action drops below the text --- */
+  .tile {
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9.3 TOUCH DEVICES (hover: none)
+   Disable hover lift where hover doesn't exist, avoiding "sticky" hover
+   states after a tap on phones/tablets.
+   -------------------------------------------------------------------------- */
+@media (hover: none) {
+  .tile:hover {
+    transform: none;
+    box-shadow: var(--shadow);
   }
 }

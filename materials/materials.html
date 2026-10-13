@@ -1,116 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Materials | Bob & Robert</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Supplemental materials: sketchbooks, writings, press, and installation views for the Bob & Robert estate."/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-  <style>
-    :root{--wall:#f3efe9;--paper:#fffdf9;--ink:#1b1816;--muted:#6f675f;--accent:#b48a5a;--frame:#e3ddd5;--max:1180px;--shadow:0 14px 40px rgba(0,0,0,.08);--shadow-lg:0 30px 80px rgba(0,0,0,.14);--radius:16px}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Inter,system-ui;background:var(--wall);color:var(--ink);line-height:1.7}
-    .brand{display:flex;align-items:baseline;gap:12px}
-    .brand h1{font-family:'Playfair Display',serif;font-size:28px;line-height:1}
-    .brand .sub{color:var(--muted);font-size:.9rem;letter-spacing:.02em}
-    .nav ul{list-style:none;display:flex;gap:22px}
-    .nav a{text-decoration:none;color:var(--muted);font-weight:600;font-size:.95rem}
-    .nav a:hover{color:var(--ink)}
-    header{max-width:var(--max);margin:60px auto 24px;padding:0 24px}
-    h1{font-family:'Playfair Display',serif;font-size:44px}
-    .lead{color:var(--muted);max-width:65ch;margin-top:10px}
-    .doors{max-width:var(--max);margin:18px auto 80px;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
-    .door{background:var(--paper);padding:28px;border-radius:14px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow)}
-    .door h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px}
-    .door span{color:var(--muted)}
 
-/* Nav V3: stack brand over links, links scroll if needed */
-  .nav{position:sticky;top:0;z-index:30;background:rgba(243,239,233,.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.06)}
-    .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 16px; }
-    .brand .sub { display: none; }
-    .nav ul { gap: 18px; width: 100%; overflow-x: auto; white-space: nowrap; }
-    .nav a { display: inline-block; padding: 6px 0; }
-  
+  <!-- ==========================================================================
+       PAGE: Materials | Bob & Robert  (Supplemental materials hub)
+       ==========================================================================
 
-.door-wide{
-  grid-column:1 / -1;
-  background:var(--paper);
-  padding:16px 28px;
-  border-radius:14px;
-  text-decoration:none;
-  color:var(--ink);
-  box-shadow:var(--shadow);
+       TABLE OF CONTENTS
+       --------------------------------------------------------------------------
+       HEAD
+         1.  META & TITLE ............ charset, viewport, SEO description
+         2.  FONTS ................... Google Fonts (Inter + Playfair Display)
+         3.  EXTERNAL CSS ............ shared site stylesheet (style.css)
+         4.  PAGE-SPECIFIC CSS ....... materials page styles (inline)
+               4.1  Brand tweaks
+               4.2  Page header (title + intro)
+               4.3  Materials doors (card grid + overrides)
+               4.4  Wide door (full-width card)
+               4.5  Section divider
+               4.6  External links (grid + link cards)
 
-  /* change the layout */
-  display:grid;
-  grid-template-columns:1fr;
-  gap:2px;
-}
-
-.door-wide h3{
-  font-family:'Playfair Display',serif;
-  font-size:20px;
-  margin-bottom:2px;
-}
-
-.door-wide span{
-  color:var(--muted);
-  font-size:.95rem;
-}
-
-.links {
-  max-width:var(--max);
-  margin:60px auto 80px;
-  padding:0 24px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.door-link {
-  background:#f9f7f2;          /* slightly lighter than main doors */
-  padding:22px;
-  border-radius:12px;
-  text-decoration:none;
-  color:var(--ink);
-  box-shadow:0 8px 20px rgba(0,0,0,.06); /* lighter shadow */
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  transition:transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.door-link:hover {
-  transform:translateY(-3px);
-  box-shadow:0 14px 40px rgba(0,0,0,.08);
-}
-
-.door-link h3{
-  font-family:'Playfair Display',serif;
-  font-size:20px;
-  margin-bottom:6px;
-}
-
-.door-link span{
-  color:var(--muted);
-  font-size:.85rem;
-}
+       BODY
+         5.  NAVIGATION .............. sticky top bar
+         6.  PAGE HEADER ............. "Materials" title + intro
+         7.  MATERIALS DOORS ......... sketchbooks, writings, press, views, communications
+         8.  SECTION DIVIDER ......... thin rule between the two groups
+         9.  EXTERNAL LINKS .......... Flickr, Wikipedia, Smithsonian, Artstor
+         10. FOOTER
+       ========================================================================== -->
 
 
-    footer{margin:0;padding:24px;background:#efeae3;border-top:1px solid rgba(0,0,0,.08);text-align:center;color:var(--muted);font-size:.9rem}
-  
-  .section-divider {
-  width: 100%;
-  height: 1px;             /* thin line */
-  background: rgba(0,0,0,0.08); /* soft muted line */
-  margin: 60px 0;          /* spacing above and below */
-}
+  <head>
+
+    <!-- ======================================================================
+         1. META & TITLE
+         ====================================================================== -->
+
+    <!-- Character encoding: must be declared early in <head> -->
+    <meta charset="utf-8">
+
+    <!-- Browser tab / search result title -->
+    <title>Materials | Bob &amp; Robert</title>
+
+    <!-- Mobile scaling: render at device width, no zoom-out on load -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+    <!-- Search engine snippet -->
+    <meta
+      name="description"
+      content="Supplemental materials: sketchbooks, writings, press, and installation views for the Bob &amp; Robert estate.">
 
 
-  </style>
-</head>
-<body>
+    <!-- ======================================================================
+         2. FONTS
+         Inter (body text): weights 300, 400, 600
+         Playfair Display (headings): 600 regular + 600 italic
+         ====================================================================== -->
+
+    <!-- Open the connection to the font host early for faster loading -->
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+    <!-- The font stylesheet itself; display=swap shows fallback text until loaded -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap">
+
+
+    <!-- ======================================================================
+         3. EXTERNAL CSS
+         Shared site stylesheet. It supplies what this page used to define on
+         its own: color tokens, reset, body, nav bar, brand, base .doors/.door
+         card styles, and footer.
+         Loaded BEFORE the inline block so the page-specific rules below win.
+         ====================================================================== -->
+  <link rel="stylesheet" href="/style.css">
+
+
+    <!-- ======================================================================
+         4. PAGE-SPECIFIC CSS (inline)
+         Only rules that differ from, or add to, style.css live here.
+         ====================================================================== -->
+    <style>
+
+      /* ---------------------------------------------------------------------
+         4.1 BRAND TWEAKS
+         Small additions on top of the shared .brand styles.
+         --------------------------------------------------------------------- */
+      .brand h1 {
+        line-height: 1;                 /* tight leading so title and subtitle align */
+      }
+
+      .brand .sub {
+        letter-spacing: .02em;          /* slight tracking on the subtitle */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.2 PAGE HEADER
+         Big "Materials" title and the intro paragraph beneath it.
+         NOTE: style.css has a mobile rule for plain `header`; this rule comes
+         later, so it takes precedence at every screen size.
+         --------------------------------------------------------------------- */
+      header {
+        max-width: var(--max);
+        margin: 60px auto 24px;
+        padding: 0 24px;
+      }
+
+      header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 44px;
+      }
+
+      /* Overrides the shared .lead (which uses 16px top margin, 62ch width) */
+      .lead {
+        color: var(--muted);
+        max-width: 65ch;                /* limits line length for readability */
+        margin-top: 10px;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.3 MATERIALS DOORS
+         The shared .doors / .door styles do most of the work. These are the
+         differences for this page: slightly wider columns, tighter gaps,
+         different outer margins, and smaller card headings.
+         --------------------------------------------------------------------- */
+
+      /* Card grid: columns of at least 260px (shared default is 240px) */
+      .doors {
+        margin: 18px auto 80px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 22px;
+      }
+
+      /* Card heading: 22px / 6px (shared default is 24px / 8px) */
+      .door h3 {
+        font-size: 22px;
+        margin-bottom: 6px;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.4 WIDE DOOR
+         A single card that spans the full grid width, shorter and more
+         compact than the regular doors. Used for "Communications".
+         --------------------------------------------------------------------- */
+      .door-wide {
+        grid-column: 1 / -1;            /* span from first to last grid column */
+        background: var(--paper);
+        padding: 16px 28px;             /* less vertical padding than .door */
+        border-radius: 14px;
+        text-decoration: none;
+        color: var(--ink);
+        box-shadow: var(--shadow);
+
+        /* Inner layout: single column, tight spacing between title and subtitle */
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .door-wide h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        margin-bottom: 2px;
+      }
+
+      .door-wide span {
+        color: var(--muted);
+        font-size: .95rem;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.5 SECTION DIVIDER
+         Thin horizontal rule separating the materials from the outside links.
+         --------------------------------------------------------------------- */
+      .section-divider {
+        width: 100%;
+        height: 1px;                    /* thin line */
+        background: rgba(0, 0, 0, 0.08);/* soft muted line */
+        margin: 60px 0;                 /* spacing above and below */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.6 EXTERNAL LINKS
+         Second grid with smaller, lighter cards linking out to other sites.
+         The section carries BOTH classes (class="doors links"). .links is
+         defined AFTER .doors above, so its values win where they overlap.
+         --------------------------------------------------------------------- */
+
+      /* Grid: columns of at least 220px, 20px gaps */
+      .links {
+        max-width: var(--max);
+        margin: 60px auto 80px;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      /* Link card: lighter and flatter than the main doors */
+      .door-link {
+        background: #f9f7f2;            /* slightly lighter than main doors */
+        padding: 22px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: var(--ink);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, .06);    /* lighter shadow */
+
+        /* Stack title over subtitle, left-aligned */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      /* Small lift on hover */
+      .door-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, .08);
+      }
+
+      .door-link h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        margin-bottom: 6px;
+      }
+
+      .door-link span {
+        color: var(--muted);
+        font-size: .85rem;
+      }
+
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <!-- ======================================================================
+         5. NAVIGATION
+         Sticky bar: brand on the left, four page links on the right.
+         Styled by style.css (section 3 there).
+         ====================================================================== -->
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="Home">
@@ -118,50 +259,158 @@
         <span class="sub">The Virtual Estate</span>
       </a>
       <ul>
-        <li><a href="/available/">Available</a></li>
-        <li><a href="/collection/">Collection</a></li>
-        <li><a href="/materials/">Materials</a></li>
-        <li><a href="">Contact</a></li>
+        <li><a href="/available/available.html">Available</a></li>
+        <li><a href="/collection/collection.html">Collection</a></li>
+        <li><a href="/materials/materials.html">Materials</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <header>
-    <h1>Materials</h1>
-    <p class="lead">Supplemental materials at scale: sketchbooks, writings (including Robert DeLavergne), press, and installation views. Organized for research and reference.</p>
-  </header>
 
-  <section class="doors">
-    <a class="door" href="/materials/sketchbooks/"><h3>Sketchbooks</h3><span>Indices and page viewers</span></a>
-    <a class="door" href="/materials/writings/"><h3>Writings</h3><span>By Cremean and DeLavergne</span></a>
-    <a class="door" href="#"><h3>Press (coming)</h3><span>Reviews, and, Catalogs</span></a>
-    <a class="door" href="#"><h3>Installation Views (coming)</h3><span>Exhibitions and Studio</span></a>
-    <a class="door-wide" href="#"><h3>Communications (Coming)</h3><span>Archived Leters, and Messages</span></a>
-  </section>
+    <!-- ======================================================================
+         6. PAGE HEADER
+         ====================================================================== -->
+    <header>
 
-<div class="section-divider"></div> <!-- ← divider added here -->
+      <h1>Materials</h1>
 
+      <p class="lead">
+        Supplemental materials at scale: sketchbooks, writings (including Robert DeLavergne),
+        press, and installation views. Organized for research and reference.
+      </p>
 
-  <section class="doors links">
-  <a class="door-link" href="https://www.flickr.com/" target="_blank">
-    <h3>Flickr</h3>
-    <span>Studio and archival images</span>
-  </a>
-  <a class="door-link" href="https://en.wikipedia.org/wiki/Robert_Cremean" target="_blank">
-    <h3>Wikipedia</h3>
-    <span>Artist overview and biography</span>
-  </a>
-  <a class="door-link" href="https://www.si.edu/archives" target="_blank">
-    <h3>Smithsonian Archives</h3>
-    <span>Official research and archival references</span>
-  </a>
-  <a class="door-link" href="https://www.artstor.org/" target="_blank">
-    <h3>Artstor</h3>
-    <span>Curated visual collections</span>
-  </a>
-</section>
+    </header>
 
 
-  <footer>© 2026 · Bob & Robert — The Virtual Estate</footer>
-</body>
+    <!-- ======================================================================
+         7. MATERIALS DOORS
+         Four standard cards in a responsive grid, then one full-width card.
+         Links marked "#" are placeholders for pages still to come.
+         ====================================================================== -->
+    <section class="doors">
+
+      <!-- Door 1: Sketchbooks -->
+      <a
+        class="door"
+        href="/materials/sketchbooks/">
+
+        <h3>Sketchbooks</h3>
+        <span>Indices and page viewers</span>
+
+      </a>
+
+      <!-- Door 2: Writings -->
+      <a
+        class="door"
+        href="/materials/writings/">
+
+        <h3>Writings</h3>
+        <span>By Cremean and DeLavergne</span>
+
+      </a>
+
+      <!-- Door 3: Press (placeholder, coming soon) -->
+      <a
+        class="door"
+        href="#">
+
+        <h3>Press (coming)</h3>
+        <span>Reviews, and, Catalogs</span>
+
+      </a>
+
+      <!-- Door 4: Installation Views (placeholder, coming soon) -->
+      <a
+        class="door"
+        href="#">
+
+        <h3>Installation Views (coming)</h3>
+        <span>Exhibitions and Studio</span>
+
+      </a>
+
+      <!-- Door 5: Communications (full-width, placeholder, coming soon) -->
+      <a
+        class="door-wide"
+        href="#">
+
+        <h3>Communications (Coming)</h3>
+        <span>Archived Leters, and Messages</span>
+
+      </a>
+
+    </section>
+
+
+    <!-- ======================================================================
+         8. SECTION DIVIDER
+         Visual break between the site's own materials and outside links.
+         ====================================================================== -->
+    <div class="section-divider"></div>
+
+
+    <!-- ======================================================================
+         9. EXTERNAL LINKS
+         Outside resources; each opens in a new tab.
+         ====================================================================== -->
+    <section class="doors links">
+
+      <!-- Flickr -->
+      <a
+        class="door-link"
+        href="https://www.flickr.com/"
+        target="_blank">
+
+        <h3>Flickr</h3>
+        <span>Studio and archival images</span>
+
+      </a>
+
+      <!-- Wikipedia -->
+      <a
+        class="door-link"
+        href="https://en.wikipedia.org/wiki/Robert_Cremean"
+        target="_blank">
+
+        <h3>Wikipedia</h3>
+        <span>Artist overview and biography</span>
+
+      </a>
+
+      <!-- Smithsonian Archives -->
+      <a
+        class="door-link"
+        href="https://www.si.edu/archives"
+        target="_blank">
+
+        <h3>Smithsonian Archives</h3>
+        <span>Official research and archival references</span>
+
+      </a>
+
+      <!-- Artstor -->
+      <a
+        class="door-link"
+        href="https://www.artstor.org/"
+        target="_blank">
+
+        <h3>Artstor</h3>
+        <span>Curated visual collections</span>
+
+      </a>
+
+    </section>
+
+
+    <!-- ======================================================================
+         10. FOOTER
+         Styled by style.css (section 8 there).
+         ====================================================================== -->
+    <footer>
+      © 2026 · Bob &amp; Robert — The Virtual Estate
+    </footer>
+
+  </body>
+
 </html>
