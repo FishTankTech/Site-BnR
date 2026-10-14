@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- ==========================================================================
+       PAGE: French Shelf 3 | Bob & Robert  (Work detail page)
+       ==========================================================================
+
+       TABLE OF CONTENTS
+       --------------------------------------------------------------------------
+       HEAD
+         1.  META & TITLE ............ charset, viewport, SEO description
+         2.  FONTS ................... Google Fonts (Inter + Playfair Display)
+         3.  EXTERNAL CSS ............ shared site stylesheet (style.css)
+         4.  PAGE-SPECIFIC CSS ....... work-page styles (inline)
+               4.1  Brand tweaks
+               4.2  Page header (title + price badge)
+               4.3  Page layout (two-column grid, panes)
+               4.4  Image gallery (main image + thumbnails)
+               4.5  Details sidebar (fields, Inquire button)
+               4.6  Synopsis & technical notes
+               4.7  Lightbox (full-screen image viewer)
+               4.8  Responsive
+
+       BODY
+         5.  NAVIGATION .............. sticky top bar
+         6.  PAGE HEADER ............. title + price badge
+         7.  MAIN CONTENT ............ gallery + details sidebar
+               7.1  Image gallery
+               7.2  Details sidebar
+         8.  SYNOPSIS & NOTES ....... essay + technical notes
+         9.  FOOTER
+         10. LIGHTBOX ................ overlay markup + JavaScript
+       ========================================================================== -->
+
+
+  <head>
+
+    <!-- ======================================================================
+         1. META & TITLE
+         ====================================================================== -->
+
+    <!-- Character encoding: must be declared early in <head> -->
+    <meta charset="utf-8">
+
+    <!-- Browser tab / search result title -->
+    <title>French Shelf 3 - A Self-Portrait In Three Generations | Bob &amp; Robert</title>
+
+    <!-- Mobile scaling: render at device width, no zoom-out on load -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+    <meta
+      name="description"
+      content="Documentation for the visual work 'French Shelf 3 - A Self-Portrait In Three Generations' By Robert Cremean: synopsis, specifications, format, stills, and inquiry.">
+
+
+    <!-- ======================================================================
+         2. FONTS
+         Inter (body text): weights 300, 400, 600
+         Playfair Display (headings): 600 regular + 600 italic
+         ====================================================================== -->
+
+    <!-- Open the connection to the font host early for faster loading -->
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+    <!-- The font stylesheet itself; display=swap shows fallback text until loaded -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap">
+
+
+    <!-- ======================================================================
+         3. EXTERNAL CSS
+         Shared site stylesheet. It supplies what this page used to define on
+         its own: color tokens, reset, body, sticky nav bar, brand, footer.
+         Loaded BEFORE the inline block so the page-specific rules below win.
+
+         The path starts with "/" (site root) because this page lives in a
+         subfolder (/available/). A plain "style.css" would look for the file
+         inside that folder and fail to find it.
+         ====================================================================== -->
+    <link
+      rel="stylesheet"
+      href="/style.css">
+
+
+    <!-- ======================================================================
+         4. PAGE-SPECIFIC CSS (inline)
+         Only rules unique to this work page live here.
+         ====================================================================== -->
+    <style>
+
+      /* ---------------------------------------------------------------------
+         4.1 BRAND TWEAKS
+         Small additions on top of the shared .brand styles.
+         --------------------------------------------------------------------- */
+      .brand h1 {
+        line-height: 1;                 /* tight leading so title and subtitle align */
+      }
+
+      .brand .sub {
+        letter-spacing: .02em;          /* slight tracking on the subtitle */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.2 PAGE HEADER
+         Work title on the left, price badge on the right.
+         --------------------------------------------------------------------- */
+      header {
+        max-width: var(--max);
+        margin: 50px auto 18px;
+        padding: 0 24px;
+      }
+
+      header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 40px;
+      }
+
+      /* --- 4.2.1 Title + badge row (title takes the space, badge sits right) --- */
+      .header-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: flex-start;
+        gap: 28px;
+      }
+
+      /* --- 4.2.2 Price badge --- */
+      .cost-badge {
+        margin-top: 4px;                /* optical alignment with Playfair cap height */
+        padding: 10px 14px;
+        border: 1px solid var(--frame);
+        border-radius: 12px;
+        background: var(--paper);
+        box-shadow: var(--shadow);
+        min-width: 220px;
+      }
+
+      .cost-primary {
+        font-weight: 600;
+        font-size: 1.05rem;             /* slightly larger than body, smaller than h1 */
+        letter-spacing: .01em;
+        color: var(--ink);
+      }
+
+      /* Optional variant: price in the serif heading font (not currently used) */
+      .cost-primary.alt-serif {
+        font-family: 'Playfair Display', serif;
+      }
+
+      .cost-sub {
+        margin-top: 2px;
+        font-size: .8rem;
+        color: var(--muted);
+        line-height: 1.25;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.3 PAGE LAYOUT
+         Two-column grid: wider gallery on the left, narrower details on the
+         right. Used for both the main block and the synopsis block.
+         --------------------------------------------------------------------- */
+      .layout {
+        max-width: var(--max);
+        margin: 0 auto 32px;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1.15fr .85fr;
+        gap: 26px;
+      }
+
+      /* Synopsis block: columns start at the top (not stretched to equal height)
+         and leave generous space above the footer */
+      .layout.synopsis {
+        align-items: start;
+        margin-bottom: 100px;
+      }
+
+      /* White rounded card.
+         style.css also defines .pane for the homepage hero image (400px max
+         width, 10:7 aspect ratio, clipped overflow). Those three properties
+         are reset below so these text cards can size to their content. */
+      .pane {
+        background: var(--paper);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: var(--shadow);
+
+        /* --- Reset homepage hero-pane behavior from style.css --- */
+        max-width: none;
+        aspect-ratio: auto;
+        overflow: visible;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.4 IMAGE GALLERY
+         Left column: one large main image, then a grid of thumbnails.
+         Clicking any image opens the lightbox (section 4.7).
+         --------------------------------------------------------------------- */
+
+      /* --- 4.4.1 Column wrapper --- */
+      .media-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* --- 4.4.2 Main (hero) image --- */
+      .still-main {
+        display: flex;
+        justify-content: center;
+      }
+
+      .still-main a {
+        display: block;
+        width: 100%;
+      }
+
+      .still-main img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;              /* fill the 16:9 frame, crop the excess */
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--frame);
+        background: var(--paper);
+      }
+
+      /* --- 4.4.3 Thumbnail grid: four per row ---
+         flex:1 lets the grid absorb leftover column height, so the gallery
+         lines up with the taller details card beside it. */
+      .stills {
+        flex: 1;                        /* take up all leftover height in the column */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 1fr;            /* both rows share that height equally */
+        gap: 10px;
+      }
+
+      .stills a {
+        position: relative;
+        display: block;
+        min-height: 90px;               /* floor so they never collapse */
+      }
+
+      .stills img {
+        position: absolute;
+        inset: 0;                       /* image fills its tile, whatever its native size */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--frame);
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.5 DETAILS SIDEBAR
+         Right-hand card listing the work's facts, with the Inquire button
+         pinned to the bottom.
+         --------------------------------------------------------------------- */
+
+      /* --- 4.5.1 Card as a vertical flex column so .inquire can sit at the bottom --- */
+      .pane[aria-label="Details"] {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* --- 4.5.2 Label / value pairs --- */
+      .field {
+        margin-bottom: 10px;
+      }
+
+      .label {
+        color: var(--muted);
+        font-size: .85rem;
+      }
+
+      .value {
+        font-weight: 600;
+      }
+
+      /* --- 4.5.3 Tag pills (not currently used on this page) --- */
+      .tags {
+        margin-top: 10px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        font-size: .8rem;
+        background: #f1ece5;
+        border: 1px solid var(--frame);
+        color: #5d554d;
+        padding: 4px 8px;
+        border-radius: 999px;
+      }
+
+      /* --- 4.5.4 Base button (dark pill) --- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: .9rem;
+        text-decoration: none;
+        background: var(--ink);
+        color: #fff;
+      }
+
+      /* --- 4.5.5 Inquire block ---
+         margin-top:auto pushes it to the bottom of the flex column above;
+         flex centering puts the button in the middle. */
+      .inquire {
+        margin-top: auto;
+        padding-top: 18px;
+        border-top: 1px solid var(--frame);
+        display: flex;
+        justify-content: center;        /* centers the button horizontally */
+      }
+
+      /* Larger than the base button (base is 10px 12px, .9rem) */
+      .inquire .btn {
+        flex: none;                     /* keep natural width (style.css stretches .btn on mobile) */
+        padding: 16px 36px;
+        font-size: 1.05rem;
+        border-radius: 12px;
+        letter-spacing: .02em;
+        transition: background .2s ease, transform .2s ease;
+      }
+
+      .inquire .btn:hover {
+        background: var(--accent);      /* ink to brass on hover */
+        transform: translateY(-1px);
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.6 SYNOPSIS & TECHNICAL NOTES
+         --------------------------------------------------------------------- */
+      .synopsis h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        margin-bottom: 6px;
+      }
+
+      /* Paragraph spacing: one blank line (line-height is 1.7) */
+      .synopsis p + p {
+        margin-top: 1.7em;
+      }
+
+      /* Technical notes list */
+      .notes {
+        margin-left: 18px;              /* indent bullets */
+      }
+
+      .notes li + li {
+        margin-top: 1em;                /* space between list items */
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.7 LIGHTBOX
+         Full-screen dark overlay that shows one image at a time.
+         Hidden by default (opacity 0, no mouse events); the .active class,
+         added by the script in section 10, fades it in.
+         --------------------------------------------------------------------- */
+
+      /* --- 4.7.1 Overlay --- */
+      .lightbox-overlay {
+        position: fixed;
+        inset: 0;                       /* cover the whole viewport */
+        background: rgba(27, 24, 22, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;                   /* above the sticky nav (z-index 30) */
+        opacity: 0;
+        pointer-events: none;           /* invisible overlay must not block clicks */
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox-overlay.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      /* --- 4.7.2 Expanded image --- */
+      .lightbox-overlay img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      /* --- 4.7.3 Previous / next arrow buttons --- */
+      .lightbox-overlay button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);    /* vertically centered */
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid var(--frame);
+        color: white;
+        font-size: 20px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+        backdrop-filter: blur(4px);
+      }
+
+      .lightbox-overlay .lb-prev { left: 20px; }
+      .lightbox-overlay .lb-next { right: 20px; }
+
+      .lightbox-overlay button:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.8 RESPONSIVE
+         Placed LAST so it overrides the base rules above.
+         Tablet and below: single column, two thumbnails per row.
+         --------------------------------------------------------------------- */
+      @media (max-width: 980px) {
+
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .stills {
+          grid-template-columns: repeat(2, 1fr);    /* two across on smaller screens */
+        }
+
+      }
+
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <!-- ======================================================================
+         5. NAVIGATION
+         Sticky bar: brand on the left, four page links on the right.
+         Styled by style.css (section 3 there).
+         ====================================================================== -->
+    <nav
+      class="nav"
+      aria-label="Primary">
+
+      <div class="nav-inner">
+
+        <!-- Brand: title + subtitle, links home -->
+        <a
+          class="brand"
+          href="/"
+          aria-label="Home">
+
+          <h1>Bob &amp; Robert</h1>
+          <span class="sub">The Virtual Estate</span>
+
+        </a>
+
+        <!-- Page links -->
+        <ul>
+          <li><a href="/available/available.html">Available</a></li>
+          <li><a href="/collection/collection.html">Collection</a></li>
+          <li><a href="/materials/materials.html">Materials</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+
+      </div>
+
+    </nav>
+
+
+    <!-- ======================================================================
+         6. PAGE HEADER
+         Work title (left) and price badge (right).
+         ====================================================================== -->
+    <header>
+
+      <div class="header-row">
+
+        <h1>French Shelf 3 - A Self-Portrait In Three Generations</h1>
+
+        <div class="cost-badge">
+          <div class="cost-primary">$4,500</div>
+          <div class="cost-sub">Appraised by Cranbrook Art School (2024) at $14,000</div>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- ======================================================================
+         7. MAIN CONTENT
+         Two columns: image gallery (left), details sidebar (right).
+         ====================================================================== -->
+    <main class="layout">
+
+
+      <!-- ====================================================================
+           7.1 IMAGE GALLERY
+           One main image, then eight thumbnails. Every image is wrapped in a
+           link with class="lightbox"; the script in section 10 intercepts the
+           click and opens the full-size version in the overlay instead of
+           navigating to the file.
+           ==================================================================== -->
+      <div class="media-stack">
+
+        <!-- Main image -->
+        <div class="still-main">
+
+          <a
+            class="lightbox"
+            href="/works/frenchshelves/FS3/F.S.3.jpg">
+
+            <img
+              src="/works/frenchshelves/FS3/F.S.3.jpg"
+              alt="Artwork 1">
+
+          </a>
+
+        </div>
+
+        <!-- Thumbnails -->
+        <div
+          class="stills"
+          aria-label="Stills">
+
+          <a
+            class="lightbox"
+            href="/works/frenchshelves/FS3/FS3-Grandmother.jpg">
+            <img
+              class="still"
+              src="/works/frenchshelves/FS3/FS3-Grandmother.jpg"
+              alt="Artwork-1">
+          </a>
+
+          <a
+            class="lightbox"
+            href="/works/frenchshelves/FS3/FS3-FatherMother.jpg">
+            <img
+              class="still"
+              src="/works/frenchshelves/FS3/FS3-FatherMother.jpg"
+              alt="Artwork-2">
+          </a>
+
+          <a
+            class="lightbox"
+            href="/works/frenchshelves/FS3/FS3-othergrandparents.jpg">
+            <img
+              class="still"
+              src="/works/frenchshelves/FS3/FS3-othergrandparents.jpg"
+              alt="Artwork-4">
+          </a>
+
+          <a
+            class="lightbox"
+            href="/works/frenchshelves/FS3/FS3Small.jpg">
+            <img
+              class="still"
+              src="/works/frenchshelves/FS3/FS3Small.jpg"
+              alt="Artwork-4">
+          </a>
+
+          <a
+            class="lightbox"
+            href="/works/frenchshelves/FS3/52557091990_d1b7ab45ed_b.jpg">
+            <img
+              class="still"
+              src="/works/frenchshelves/FS3/52557091990_d1b7ab45ed_b.jpg"
+              alt="Artwork-5">
+          </a>
+
+          <a
+            class="lightbox"
+            href="/works/frenchshelves/FS3/52658876719_f553b29b90_c.jpg">
+            <img
+              class="still"
+              src="/works/frenchshelves/FS3/52658876719_f553b29b90_c.jpg"
+              alt="Artwork-6">
+          </a>
+
+          <a
+            class="lightbox"
+            href="/works//frenchshelves/FS3/52574404558_c3bd6bb9ed_c.jpg">
+            <img
+              class="still"
+              src="/works//frenchshelves/FS3/52574404558_c3bd6bb9ed_c.jpg"
+              alt="Artwork-7">
+          </a>
+
+          <a
+            class="lightbox"
+            href="/works/frenchshelves/FS3/52557091990_d1b7ab45ed_b.jpg">
+            <img
+              class="still"
+              src="/works/frenchshelves/FS3/52557091990_d1b7ab45ed_b.jpg"
+              alt="Artwork-8">
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- ====================================================================
+           7.2 DETAILS SIDEBAR
+           Label/value facts about the work, then the Inquire button.
+           ==================================================================== -->
+      <aside
+        class="pane"
+        aria-label="Details">
+
+        <div class="field">
+          <div class="label">Artist</div>
+          <div class="value">Robert Cremean</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Title</div>
+          <div class="value">French Shelf 3 - A Self-Portrait In Three Generations</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Year</div>
+          <div class="value">2018</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Format</div>
+          <div class="value">Sculpture</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Installation</div>
+          <div>Landscape Sculpture on Stands</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Viewing</div>
+          <div>One of the few modern cremean works that is one directional. While there is incredible depth to this piece, it can be viewed while in a more traditional enviroment. </div>
+        </div>
+
+        <div class="field">
+          <div class="label">Studio Edition</div>
+          <div>French Shelves (2016-2021)</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Description</div>
+          <div>
+            The nine heads of French Shelf #3 represent portraits by Robert Cremean of his immediate family of which he was 
+            (at the time of production) the only surviving member.
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label">Provenance</div>
+          <div>Studio, The Virtual Estate - Housed in NC</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Availability</div>
+          <div>Available for acquisition</div>
+        </div>
+
+        <!-- Inquire button (pinned to the bottom of the card) -->
+        <div class="inquire">
+
+          <a
+            class="btn"
+            href="mailto:TheCremeanArchives@gmail.com?subject=Inquiry%3A%20French%20Shelf%20#3">
+            Inquire about this work
+          </a>
+
+        </div>
+
+      </aside>
+
+    </main>
+
+
+    <!-- ======================================================================
+         8. SYNOPSIS & TECHNICAL NOTES
+         Two columns: the essay on the left, specs on the right.
+         ====================================================================== -->
+    <section
+      class="layout synopsis"
+      aria-label="Synopsis and notes">
+
+
+<!-- Left: Synopsis essay -->
+    <article class="pane">
+    <h2>Synopsis</h2>
+
+        <p>The nine heads of this work represent portraits by Robert Cremean of his immediate family of which (At the time of creation) he was the only surviving member.</p>
+        
+        <p>As of December 2022, and at the age of ninety years, he declared he viewed the above portraits a fair representation of his family, and saw no reason as to why that would change.</p>
+        
+        <p>His fraternal grandfather is on the far left followed by his fraternal grandmother and his maternal grandfather.</p>
+        
+        <p>The single portrait in gray is that of his maternal grandmother and is followed by a representation of his eldest sister, 
+        of himself and of his youngest sister. These three are followed by his parents, the representation of his father on the left and his mother on the right.</p>
+
+    </article>
+
+
+      <!-- Right: Technical notes -->
+      <aside class="pane">
+
+        <h2>Technical Notes</h2>
+
+        <ul class="notes">
+
+          <li>
+            Deminsions: The entire piece stands at a hight of 62 Inches when sitting on the wooden structure that make up its base.
+            at its widest, the work is only 16 inches "deep" while it is 68 inches in length.
+          </li>
+
+          <li>
+            Delivery: This installation is housed in 2 shipping items - Included with this work are that handmade walnut wooden bases for this Work (2)
+          </li>
+
+          <li>
+            Material: Layered wooden Base | Plaster &amp; Granite mache | Marble inclususions & Ash for pigmentation.
+          </li>
+
+        </ul>
+
+      </aside>
+
+    </section>
+
+
+    <!-- ======================================================================
+         9. FOOTER
+         Styled by style.css (section 8 there).
+         ====================================================================== -->
+    <footer>
+      © 2026 · Bob &amp; Robert — The Virtual Estate
+    </footer>
+
+
+    <!-- ======================================================================
+         10. LIGHTBOX
+         ====================================================================== -->
+
+    <!-- ----------------------------------------------------------------------
+         10.1 Markup
+         Empty overlay: the script fills in the <img> source on open.
+         ---------------------------------------------------------------------- -->
+    <div
+      class="lightbox-overlay"
+      id="lightbox">
+
+      <button
+        class="lb-prev"
+        aria-label="Previous image">←</button>
+
+      <img
+        src=""
+        alt="Expanded artwork">
+
+      <button
+        class="lb-next"
+        aria-label="Next image">→</button>
+
+    </div>
+
+
+    <!-- ----------------------------------------------------------------------
+         10.2 Script
+         Behavior:
+           - Click any gallery image  -> opens it full-screen
+           - ← / → buttons or keys    -> previous / next (wraps around)
+           - Click the dark backdrop, or press Esc -> closes
+           - Clicking the image itself does NOT close it
+         ---------------------------------------------------------------------- -->
+    <script>
+
+      /* -------------------------------------------------------------------
+         A. ELEMENT REFERENCES
+         ------------------------------------------------------------------- */
+      const lightbox    = document.getElementById('lightbox');
+      const lightboxImg = lightbox.querySelector('img');
+      const prevBtn     = lightbox.querySelector('.lb-prev');
+      const nextBtn     = lightbox.querySelector('.lb-next');
+
+      /* Every gallery link, in page order (main image first, then thumbnails) */
+      const links = Array.from(
+        document.querySelectorAll('.still-main .lightbox, .stills .lightbox')
+      );
+
+      /* Index of the image currently shown */
+      let currentIndex = 0;
+
+
+      /* -------------------------------------------------------------------
+         B. FUNCTIONS
+         ------------------------------------------------------------------- */
+
+      /* Show the image at `index` and fade the overlay in */
+      function openLightbox(index) {
+        currentIndex = index;
+        lightboxImg.src = links[currentIndex].href;
+        lightbox.classList.add('active');
+      }
+
+      /* Next image (wraps from last to first) */
+      function showNext() {
+        currentIndex = (currentIndex + 1) % links.length;
+        lightboxImg.src = links[currentIndex].href;
+      }
+
+      /* Previous image (wraps from first to last) */
+      function showPrev() {
+        currentIndex = (currentIndex - 1 + links.length) % links.length;
+        lightboxImg.src = links[currentIndex].href;
+      }
+
+      /* Fade the overlay out */
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+      }
+
+
+      /* -------------------------------------------------------------------
+         C. EVENT LISTENERS
+         ------------------------------------------------------------------- */
+
+      /* Gallery images: open in the lightbox instead of following the link */
+      links.forEach((link, i) => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          openLightbox(i);
+        });
+      });
+
+      /* Arrow buttons (stopPropagation keeps the click from closing the overlay) */
+      nextBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        showNext();
+      });
+
+      prevBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        showPrev();
+      });
+
+      /* Click outside the image to close */
+      lightbox.addEventListener('click', closeLightbox);
+
+      /* Clicking the image itself should not close it */
+      lightboxImg.addEventListener('click', e => e.stopPropagation());
+
+      /* Keyboard: ← → to navigate, Esc to close (only while open) */
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'ArrowRight')      showNext();
+        else if (e.key === 'ArrowLeft')  showPrev();
+        else if (e.key === 'Escape')     closeLightbox();
+      });
+
+    </script>
+
+  </body>
+
+</html>

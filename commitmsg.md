@@ -1,0 +1,1 @@
+Linked Collection.html to Style.css + Finishing the French-Shelf #3 page + fixing the metatdata description on all the work pages + remembering to fix the email commands for the inquire buttons
