@@ -1,9 +1,4 @@
-Available docs:
-- Assorted
-X - Narcissus
-X - Palimpsest
-- French Shelf 3
-- French Shelf 4
-X - Maquette
+All available works need to have mobile CSS added.
+- Link in style.css if can do // mobile.css if not...
 
-ALL - Even the "finished" ones need to be re adjusted for mobile nav...
+assorted.html needs to be finished & need to find photo for that page.
