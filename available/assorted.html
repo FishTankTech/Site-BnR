@@ -1,122 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
-  <!-- ===============================
-       1. META & TITLE
-       =============================== -->
-  <meta charset="utf-8"> <link rel="icon" type="image/x-icon" href="/favicon.png">
-  <title>Materials | Bob & Robert</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Supplemental Materials; publications, writings, sketches, and documantary materials connected to the Bob & Robert estate."/>
+  <!-- ==========================================================================
+       PAGE: Supplemental Materials | Bob & Robert  (Small works, books, sketchbook)
+       ==========================================================================
 
-  <!-- ===============================
-       2. FONTS
-       =============================== -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+       TABLE OF CONTENTS
+       --------------------------------------------------------------------------
+       HEAD
+         1.  META & TITLE ............ charset, favicon, viewport, SEO description
+         2.  FONTS ................... Google Fonts (Inter + Playfair Display)
+         3.  EXTERNAL CSS ............ shared site stylesheet (style.css)
+         4.  PAGE-SPECIFIC CSS ....... section headings, thumbnails, hero pane
+               4.1  Section headings
+               4.2  Cards with rounded, zoomed thumbnails
+               4.3  Hero pane + catalog image
+               4.4  Full-width collection card
+               4.5  Mobile adjustments
 
-  <!-- ===============================
-       3. EXTERNAL CSS
-       =============================== -->
-  <link rel="stylesheet" href="../style.css">
+       BODY
+         5.  NAVIGATION .............. sticky top bar
+         6.  HERO .................... headline, intro, cover image
+         7.  SMALL WORKS ............. two original small pieces (with thumbnails)
+         8.  BOOKS & PUBLICATIONS .... four items + full-width collection offer
+         9.  SKETCHBOOK .............. one standalone object (commented out)
+        10.  FOOTER
+       ========================================================================== -->
 
-</head>
 
-<body>
+  <head>
 
-  <!-- ===============================
-       4. NAVIGATION
-       =============================== -->
-  <nav class="nav" aria-label="Primary">
-    <div class="nav-inner">
-      <a class="brand" href="/" aria-label="Home">
-        <h1>Bob & Robert</h1>
-        <span class="sub">The Virtual Estate</span>
+    <!-- ======================================================================
+         1. META & TITLE
+         ====================================================================== -->
+
+    <!-- Character encoding: must be declared early in <head> -->
+    <meta charset="utf-8">
+
+    <!-- Browser tab icon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/favicon.png">
+
+    <!-- Browser tab / search result title -->
+    <title>Materials | Bob &amp; Robert</title>
+
+    <!-- Mobile scaling: render at device width, no zoom-out on load -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+    <!-- Search engine snippet -->
+    <meta
+      name="description"
+      content="Small works, publications, a sketchbook, and archival materials connected to the Bob &amp; Robert estate.">
+
+
+    <!-- ======================================================================
+         2. FONTS
+         Inter (body text): weights 300, 400, 600
+         Playfair Display (headings): 600 regular + 600 italic
+         ====================================================================== -->
+
+    <!-- Open the connection to the font host early for faster loading -->
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+    <!-- The font stylesheet itself; display=swap shows fallback text until loaded -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap">
+
+
+    <!-- ======================================================================
+         3. EXTERNAL CSS
+         Shared site stylesheet: nav, hero, .doors / .door cards, footer.
+         Loaded BEFORE the inline block so the page-specific rules win.
+         "../" means "one folder up", so this assumes the page sits one level
+         below the site root (e.g. /materials/). If the page moves, use
+         "/style.css" (site root) instead.
+         ====================================================================== -->
+    <link
+      rel="stylesheet"
+      href="../style.css">
+
+
+    <!-- ======================================================================
+         4. PAGE-SPECIFIC CSS (inline)
+         ====================================================================== -->
+    <style>
+
+      /* ---------------------------------------------------------------------
+         4.1 SECTION HEADINGS
+         Title + one-line description above each group of cards.
+         max-width matches the card grid (--max) so the heading's left edge
+         lines up with the cards beneath it.
+         --------------------------------------------------------------------- */
+      .section-head {
+        max-width: var(--max);
+        margin: 3rem auto 0.5rem;       /* space above, small gap below */
+        padding: 0 1.5rem;              /* same side gutter as the card grid (24px) */
+      }
+
+      .section-head h2 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        margin: 0 0 0.35rem;
+      }
+
+      .section-head p {
+        margin: 0;
+        opacity: 0.75;                  /* softened, secondary text */
+        font-weight: 300;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.2 CARDS WITH ROUNDED, ZOOMED THUMBNAILS  (.door.with-thumb)
+         Photo on the left, title and description on the right.
+         The .thumb-frame wrapper does the rounding and clipping, so the
+         zoomed image stays inside the rounded corners.
+         --------------------------------------------------------------------- */
+
+      /* --- 4.2.1 Card layout: thumbnail + text side by side --- */
+      .door.with-thumb {
+        display: flex;
+        align-items: center;            /* vertically center photo and text */
+        gap: 1.25rem;
+      }
+
+      /* --- 4.2.2 Rounded frame (matches the hero .pane styling) --- */
+      .door.with-thumb .thumb-frame {
+        flex: 0 0 160px;                /* never grow or shrink */
+        width: 160px;
+        height: 160px;
+        border-radius: 20px;            /* 28px = softer, 12px = tighter */
+        overflow: hidden;               /* clips the zoomed image to the corners */
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+        background: #fffdf8;
+      }
+
+      /* --- 4.2.3 Photo: fills the frame, then zooms in --- */
+      .door.with-thumb .door-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;        /* shifts which part stays in view */
+        transform: scale(1.25);         /* zoom: 1.0 = none, 1.5 = a lot */
+        transform-origin: center;       /* zoom toward a spot, e.g. "40% 30%" */
+        display: block;
+      }
+
+      /* --- 4.2.4 Text block ---
+         min-width: 0 lets long text wrap instead of pushing the card wider. */
+      .door.with-thumb .door-text {
+        display: block;
+        min-width: 0;
+      }
+
+      .door.with-thumb .door-text h3 {
+        margin-top: 0;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.3 HERO PANE + CATALOG IMAGE
+         Cream mat with a rounded frame; the image sits 12px inside it.
+         --------------------------------------------------------------------- */
+      .pane {
+        background: #fffdf8;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        position: relative;
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        min-height: 320px;
+        padding: 0;                     /* the image handles the inset */
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      .catalog-image {
+        position: absolute;
+        inset: 12px;                    /* 12px frame on all four sides */
+        width: calc(100% - 24px) !important;
+        height: calc(100% - 24px) !important;
+        max-width: none !important;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 16px;
+        display: block;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.4 FULL-WIDTH COLLECTION CARD
+         Spans the whole row. All three lines are kept so it works whether
+         .doors in style.css is a grid or a wrapping flexbox.
+         --------------------------------------------------------------------- */
+      .door.collection-offer {
+        grid-column: 1 / -1;            /* grid: span every column */
+        flex: 1 1 100%;                 /* flex-wrap: take the full row */
+        width: 100%;
+      }
+
+
+      /* ---------------------------------------------------------------------
+         4.5 MOBILE ADJUSTMENTS  (max-width: 520px)
+         Thumbnail moves on top of the text and spans the full card width.
+         --------------------------------------------------------------------- */
+      @media (max-width: 520px) {
+
+        .door.with-thumb {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .door.with-thumb .thumb-frame {
+          width: 100%;
+          height: 220px;
+          flex-basis: auto;
+        }
+
+      }
+
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <!-- ======================================================================
+         5. NAVIGATION
+         Sticky bar: brand on the left, four page links on the right.
+         ====================================================================== -->
+    <nav
+      class="nav"
+      aria-label="Primary">
+
+      <div class="nav-inner">
+
+        <!-- Brand: title + subtitle, links home -->
+        <a
+          class="brand"
+          href="/"
+          aria-label="Home">
+
+          <h1>Bob &amp; Robert</h1>
+          <span class="sub">The Virtual Estate</span>
+
+        </a>
+
+        <!-- Page links -->
+        <ul>
+          <li><a href="/available/available.html">Available</a></li>
+          <li><a href="/collection/collection.html">Collection</a></li>
+          <li><a href="/materials/materials.html">Materials</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+
+      </div>
+
+    </nav>
+
+
+    <!-- ======================================================================
+         6. HERO
+         Two columns on desktop (text | cover image), stacked on tablet/mobile.
+         Layout comes from "header.hero" in style.css.
+         ====================================================================== -->
+    <header class="hero">
+
+      <!-- Left column: headline + intro -->
+      <div>
+
+        <h2>Supplemental Materials</h2>
+
+        <p class="lead">
+          Small works, publications, lecture transcripts, and archival documents expanding the
+          conceptual and historical context of the work. These materials function as extensions
+          of the studio practice — collectible objects and documents accompanying the visual
+          body of work.
+        </p>
+
+      </div>
+
+      <!-- Right column: cover image -->
+      <aside class="pane">
+
+        <img
+          class="catalog-image"
+          src="/materials/photos/christopherwhitby.jpg"
+          alt="Supplemental materials catalog">
+
+      </aside>
+
+    </header>
+
+
+    <!-- ======================================================================
+         7. SMALL WORKS
+         Original small-format pieces. Each card has a rounded, zoomed
+         thumbnail on the left and opens a pre-filled email inquiry.
+         Placeholder text and prices ("$000") still need real values.
+         ====================================================================== -->
+    <div class="section-head">
+
+      <h2>Small Works</h2>
+      <p>Original small-format pieces from the studio. Inquire for availability.</p>
+
+    </div>
+
+    <section class="doors">
+
+      <!-- Small Work I -->
+      <a
+        class="door with-thumb"
+        href="mailto:?subject=Inquiry%3A%20Small%20Work%20I">
+
+        <div class="thumb-frame">
+          <img
+            class="door-thumb"
+            src="/works/frenchshelves/FS2(P)/FS2-1020_155819.JPG"
+            alt="Small Work I"
+            loading="lazy">
+        </div>
+
+        <div class="door-text">
+          <h3>Small Work I</h3>
+          <span>Title, medium, and dimensions to come · $000</span>
+        </div>
+
       </a>
-      <ul>
-        <li><a href="/available/available.html">Available</a></li>
-        <li><a href="/collection/collection.html">Collection</a></li>
-        <li><a href="/materials/materials.html">Materials</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
+
+      <!-- Small Work II -->
+      <a
+        class="door with-thumb"
+        href="mailto:?subject=Inquiry%3A%20Small%20Work%20II">
+
+        <div class="thumb-frame">
+          <img
+            class="door-thumb"
+            src="/materials/photos/small-work-2.jpg"
+            alt="Small Work II"
+            loading="lazy">
+        </div>
+
+        <div class="door-text">
+          <h3>Small Work II</h3>
+          <span>Title, medium, and dimensions to come · $000</span>
+        </div>
+
+      </a>
+
+    </section>
+
+
+    <!-- ======================================================================
+         8. BOOKS & PUBLICATIONS
+         One card per item, plus the full-width Collection offer at the end.
+         All cards share ONE <section class="doors">, so there is no gap
+         between the row of books and the Collection card.
+         Each card opens a pre-filled email inquiry.
+         ====================================================================== -->
+    <div class="section-head">
+
+      <h2>Books &amp; Publications</h2>
+      <p>Printed volumes documenting the practice, writings, and archive.</p>
+
     </div>
-  </nav>
+
+    <section class="doors">
+
+      <!-- Item 1: Single published works ($25) -->
+      <a
+        class="door"
+        href="mailto:?subject=Inquiry%3A%20Individual%20Publications">
+
+        <h3>Individual Publications</h3>
+        <span>Choose from the wide collection of published literature documenting Cremean · $25</span>
+
+      </a>
+
+      <!-- Item 2: Lecture transcripts + The 10th Arch ($40) -->
+      <a
+        class="door"
+        href="mailto:?subject=Inquiry%3A%207%20Lectures%20and%20The%2010th%20Arch">
+
+        <h3>&ldquo;7 Lectures&rdquo; &amp; &ldquo;The 10th Arch&rdquo;</h3>
+        <span>This pair of books gives insight into Bob as a person, a teacher, and an artist · $40</span>
+
+      </a>
+
+      <!-- Item 3: Vatican Corridor ($40) -->
+      <a
+        class="door"
+        href="mailto:?subject=Inquiry%3A%20Vatican%20Corridor">
+
+        <h3>&ldquo;Vatican Corridor&rdquo;</h3>
+        <span>A deep dive on his most famous work, this hand bound &amp; numbered publication is art of its own kind · $40</span>
+
+      </a>
+
+      <!-- Item 4: A/V works, bundled ($50) -->
+      <a
+        class="door"
+        href="mailto:?subject=Inquiry%3A%20A%2FV%20Works">
+
+        <h3>A/V Works (Bundled)</h3>
+        <span>Cremean published 3 documentary style works through both DVD and VHS. This will include all 3 · $50</span>
+
+      </a>
+
+      <!-- Collection offer: all supplemental publications as one set ($150).
+           Small works and the sketchbook are NOT included in the set.
+           The collection-offer class makes it span the full width. -->
+      <a
+        class="door collection-offer"
+        href="mailto:?subject=Inquiry%3A%20Cremean%20Collection">
+
+        <h3>The Cremean Collection</h3>
+
+        <span>
+          Complete set of all supplemental publications.
+          Intended as a unified archival entry point into the extended body of work.
+          Small works and the sketchbook are offered separately.
+          · $150 Complete Set
+        </span>
+
+      </a>
+
+    </section>
 
 
-  <!-- ===============================
-       5. HERO
-       =============================== -->
-  <header class="hero">
+    <!-- ======================================================================
+         9. SKETCHBOOK  (currently commented out)
+         A standalone object, sold separately from the complete set.
+         Description and price are placeholders. Remove the comment markers
+         to show it.
 
-    <div>
-      <h2>Supplemental Materials</h2>
+    <div class="section-head">
 
-      <p class="lead">
-        Publications, lecture transcripts, and archival documents expanding the conceptual and historical context of the work.  
-        These materials function as extensions of the studio practice — collectible documents accompanying the visual body of work.
-      </p>
+      <h2>Sketchbook</h2>
+      <p>A standalone object, offered separately from the complete set.</p>
+
     </div>
 
-    <aside class="pane">
-      <img
-        src="/materials/photos/christopherwhitby.jpg"
-        alt="Supplemental materials catalog"
-        class="catalog-image">
-    </aside>
+    <section class="doors">
 
-  </header>
+      <a
+        class="door"
+        href="mailto:?subject=Inquiry%3A%20Sketchbook">
 
+        <h3>The Sketchbook</h3>
+        <span>Studio sketchbook, description and condition notes to come · $000</span>
 
-  <!-- ===============================
-       6. MATERIAL ITEMS
-       =============================== -->
-  <section class="doors">
+      </a>
 
-    <a class="door" href="mailto:?subject=Inquiry%3A%20Promotional%20Book%20I">
-      <h3>Promotional Book I</h3>
-      <span>Studio essays, installation documentation · $45</span>
-    </a>
-
-    <a class="door" href="mailto:?subject=Inquiry%3A%20Lecture%20Transcript%20Series">
-      <h3>Lecture Transcript Series</h3>
-      <span>Public lecture transcripts discussing material philosophy · $35</span>
-    </a>
-
-    <a class="door" href="mailto:?subject=Inquiry%3A%20Studio%20Archive%20Booklet">
-      <h3>Studio Archive Booklet</h3>
-      <span>Early sketches and archival notes · $40</span>
-    </a>
-
-  </section>
+    </section>
+         ====================================================================== -->
 
 
-  <!-- ===============================
-       7. COLLECTION OFFER
-       =============================== -->
-  <section class="doors">
+    <!-- ======================================================================
+         10. FOOTER
+         ====================================================================== -->
+    <footer>
+      © 2026 · Bob &amp; Robert — The Virtual Estate · Catalog V-001
+    </footer>
 
-    <a class="door" href="mailto:?subject=Inquiry%3A%20Cremean%20Collection">
+  </body>
 
-      <h3>The Cremean Collection</h3>
-
-      <span>
-        Complete set of all supplemental publications.  
-        Intended as a unified archival entry point into the extended body of work.  
-        · $150 Complete Set
-      </span>
-
-    </a>
-
-  </section>
-
-
-  <!-- ===============================
-       8. FOOTER
-       =============================== -->
-  <footer>
-    © 2026 · Bob & Robert — The Virtual Estate · Catalog V-001
-  </footer>
-
-</body>
 </html>
